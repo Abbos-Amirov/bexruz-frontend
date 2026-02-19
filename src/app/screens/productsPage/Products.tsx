@@ -100,10 +100,13 @@ export default function Products(props: ProductProps) {
   useEffect(() => {
     const product = new ProductService();
     product
-      .getProducts(productSearch)
-      .then((data) => setProducts(data))
-      .catch((err) => console.log(err));
-  }, [productSearch]);
+      .getAdminProducts()
+      .then((data) => setProducts(data || []))
+      .catch((err) => {
+        console.log("Products fetch error:", err);
+        setProducts([]);
+      });
+  }, []);
 
   useEffect(() => {
     if (searchText === "") {
@@ -136,8 +139,8 @@ export default function Products(props: ProductProps) {
     setProductSearch({ ...productSearch });
   };
 
-  const chooseDishHandler = (id: string) => {
-    history.push(`/products/${id}`);
+  const chooseDishHandler = (product: Product) => {
+    history.push(`/products/${product._id}`, { product });
   };
 
   if (device === "mobile") {
@@ -229,7 +232,7 @@ export default function Products(props: ProductProps) {
                   <Box
                     key={product._id}
                     className="mobile-product-card"
-                    onClick={() => chooseDishHandler(product._id)}
+                    onClick={() => chooseDishHandler(product)}
                   >
                     <Box className="mobile-product-image-container">
                       <img
@@ -431,7 +434,7 @@ export default function Products(props: ProductProps) {
                         <Stack
                           key={product._id}
                           className="product-card"
-                          onClick={() => chooseDishHandler(product._id)}
+                          onClick={() => chooseDishHandler(product)}
                         >
                           <Stack
                             className="product-img"

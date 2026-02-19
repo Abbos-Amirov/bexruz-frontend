@@ -35,6 +35,29 @@ class ProductService {
       throw err;
     }
   }
+
+  public async getAdminProducts(): Promise<Product[]> {
+    try {
+      const url = `${this.path}/admin/product/all`;
+      const result = await axios.get(url, { withCredentials: true });
+      console.log("Admin Products: ", result);
+      return result.data;
+    } catch (err) {
+      console.log("Error, getAdminProducts: ", err);
+      throw err;
+    }
+  }
+
+  public async getAdminProduct(productId: string): Promise<Product> {
+    try {
+      const url = `${this.path}/admin/product/${productId}`;
+      const result = await axios.get(url, { withCredentials: true });
+      return result.data;
+    } catch (err) {
+      console.log("Error, getAdminProduct: ", err);
+      throw err;
+    }
+  }
 }
 
 export default ProductService;
