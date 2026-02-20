@@ -1,13 +1,12 @@
 import React from "react";
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
-import TabPanel from "@mui/lab/TabPanel";
 import { retrievePausedOrders } from "./selector";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { OrderStatus, PaymentStatus } from "../../../lib/enums/order.enum";
 import { useGlobals } from "../../hooks/useGlobals";
@@ -25,20 +24,14 @@ const pausedOrdersRetriever = createSelector(
   (pausedOrders) => ({ pausedOrders })
 );
 
-interface PausedOrderProps {
-  setValue: (input: string) => void;
-}
-
-export default function PausedOrders(props: PausedOrderProps) {
-  const { setValue } = props;
-  const { authMember, setOrderBulder, authTable } = useGlobals();
+export default function PausedOrders() {
+  const { setOrderBulder, authMember, authTable } = useGlobals();
   const { pausedOrders } = useSelector(pausedOrdersRetriever);
   const device = useDeviceDetect();
 
   /** HANDLERS **/
   const deleteOrderHandler = async (e: T) => {
     try {
-      if (!authTable) throw new Error(Messages.error2);
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -59,9 +52,6 @@ export default function PausedOrders(props: PausedOrderProps) {
 
   const processOrderHandler = async (e: T) => {
     try {
-      if (!authMember && !authTable) throw new Error(Messages.error2);
-      //  PAYMENT PROCESS
-
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -77,7 +67,6 @@ export default function PausedOrders(props: PausedOrderProps) {
       if (confirmation) {
         const order = new OrderService();
         await order.updateOrder(input);
-        setValue("2");
         setOrderBulder(new Date());
       }
     } catch (err) {
@@ -88,7 +77,7 @@ export default function PausedOrders(props: PausedOrderProps) {
 
   if (device === "mobile") {
     return (
-      <TabPanel value="1">
+      <Box>
         <Box className="mobile-orders-list">
           {pausedOrders && pausedOrders.length > 0 ? (
             pausedOrders.map((order: Order) => (
@@ -171,12 +160,12 @@ export default function PausedOrders(props: PausedOrderProps) {
             </Box>
           )}
         </Box>
-      </TabPanel>
+      </Box>
     );
   }
 
   return (
-    <TabPanel value="1">
+    <Box>
       <Stack>
         {pausedOrders?.map((order: Order) => {
           return (
@@ -250,6 +239,6 @@ export default function PausedOrders(props: PausedOrderProps) {
             </Box>
           ))}
       </Stack>
-    </TabPanel>
+    </Box>
   );
 }

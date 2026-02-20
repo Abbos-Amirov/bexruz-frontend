@@ -9,7 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
@@ -27,7 +27,7 @@ interface BasketProps {
 
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
-  const { authMember, setOrderBulder, authTable } = useGlobals();
+  const { setOrderBulder } = useGlobals();
   const history = useHistory();
   const itemsPrice = cartItems.reduce(
     (a: number, c: CartItem) => a + c.quantity * c.price,
@@ -63,7 +63,6 @@ export default function Basket(props: BasketProps) {
   const proceedOrderHandler = async () => {
     try {
       handleClose();
-      if (!authMember&&!authTable) throw new Error(Messages.error2);
 
       const order = new OrderService();
       await order.createOrder(cartItems);

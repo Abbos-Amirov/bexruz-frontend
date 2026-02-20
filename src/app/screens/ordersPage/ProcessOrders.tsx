@@ -1,14 +1,13 @@
 import React from "react";
 import { Box, Stack } from "@mui/material";
 import Button from "@mui/material/Button";
-import TabPanel from "@mui/lab/TabPanel";
 import moment from "moment";
 import { retrievePendingOrders, retrieveProcessOrders } from "./selector";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi } from "../../../lib/config";
 import { useGlobals } from "../../hooks/useGlobals";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
@@ -33,13 +32,12 @@ const processOrdersRetriever = createSelector(
 );
 
 interface ProcessOrdersProps {
-  setValue: (input: string) => void;
   callHandler: (id: string) => void;
 }
 
 export default function ProcessOrders(props: ProcessOrdersProps) {
-  const { setValue, callHandler } = props;
-  const { authMember, setOrderBulder, authTable } = useGlobals();
+  const { callHandler } = props;
+  const { setOrderBulder, authTable } = useGlobals();
   const { processOrders } = useSelector(processOrdersRetriever);
   const { pendingOrders } = useSelector(pendingOrdersRetriever);
   const device = useDeviceDetect();
@@ -47,7 +45,6 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
   /** HANDLERS **/
   const deleteOrderHandler = async (e: T) => {
     try {
-      if (!authTable && !authMember) throw new Error(Messages.error2);
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -68,8 +65,6 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
 
   const finishOrderHandler = async (e: T) => {
     try {
-      if (!authMember) throw new Error(Messages.error2);
-
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -80,7 +75,6 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
       if (confirmation) {
         const order = new OrderService();
         await order.updateOrder(input);
-        setValue("3");
         setOrderBulder(new Date());
       }
     } catch (err) {
@@ -91,7 +85,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
   if (device === "mobile") {
     const allOrders = pendingOrders?.concat(processOrders) || [];
     return (
-      <TabPanel value="2">
+      <Box>
         <Box className="mobile-orders-list">
           {allOrders.length > 0 ? (
             allOrders.map((order: Order) => (
@@ -163,16 +157,16 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                     value={order._id}
                     variant="contained"
                     className="mobile-order-process-btn"
-                    startIcon={authMember ? <CheckCircleIcon /> : <PhoneIcon />}
+                    startIcon={authTable ? <PhoneIcon /> : <CheckCircleIcon />}
                     onClick={(e) => {
-                      if (authMember) {
-                        finishOrderHandler(e);
-                      } else if (authTable) {
+                      if (authTable) {
                         callHandler(authTable._id);
+                      } else {
+                        finishOrderHandler(e);
                       }
                     }}
                   >
-                    {authMember ? "Verify" : "Call"}
+                    {authTable ? "Call" : "Verify"}
                   </Button>
                 </Box>
               </Box>
@@ -184,12 +178,12 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
             </Box>
           )}
         </Box>
-      </TabPanel>
+      </Box>
     );
   }
 
   return (
-    <TabPanel value="2">
+    <Box>
       <Stack>
         {pendingOrders?.concat(processOrders).map((order: Order) => {
           return (
@@ -244,14 +238,14 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                     variant="contained"
                     className="verify-button"
                     onClick={(e) => {
-                      if (authMember) {
-                        finishOrderHandler(e);
-                      } else if (authTable) {
+                      if (authTable) {
                         callHandler(authTable._id);
+                      } else {
+                        finishOrderHandler(e);
                       }
                     }}
                   >
-                    {authMember ? "Verify" : "Call"}
+                    {authTable ? "Call" : "Verify"}
                   </Button>
                 </Box>
               </Box>
@@ -273,6 +267,6 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
           </Box>
         )}
       </Stack>
-    </TabPanel>
+    </Box>
   );
 }

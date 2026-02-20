@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import {
   Box,
   Button,
@@ -101,7 +101,10 @@ export default function Products(props: ProductProps) {
     const product = new ProductService();
     product
       .getAdminProducts()
-      .then((data) => setProducts(data || []))
+      .then((data) => {
+        const list = Array.isArray(data) ? data : (data as any)?.data ?? (data as any)?.value ?? [];
+        setProducts(Array.isArray(list) ? list : []);
+      })
       .catch((err) => {
         console.log("Products fetch error:", err);
         setProducts([]);
@@ -110,33 +113,89 @@ export default function Products(props: ProductProps) {
 
   useEffect(() => {
     if (searchText === "") {
-      productSearch.search = "";
-      setProductSearch({ ...productSearch });
+      setProductSearch((prev) => ({ ...prev, search: "", page: 1 }));
     }
   }, [searchText]);
+
+  /** Filtered & sorted products (client-side) */
+  const filteredProducts = useMemo(() => {
+    const rawProducts = products || [];
+    if (!Array.isArray(rawProducts)) return [];
+    let result = [...rawProducts];
+
+    // Filter by category
+    if (productSearch.productCollection) {
+      result = result.filter((p) => p?.productCollection === productSearch.productCollection);
+    }
+
+    // Filter by search
+    if (productSearch.search?.trim()) {
+      const searchLower = productSearch.search.toLowerCase();
+      result = result.filter((p) =>
+        (p?.productName || "").toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Sort: Yangi (createdAt), Narx (productPrice), Mashhur (productViews)
+    const order = productSearch.order || "createdAt";
+    result = [...result].sort((a, b) => {
+      if (order === "createdAt") {
+        const timeA = new Date((a as any).createdAt || (a as any).created_at || 0).getTime();
+        const timeB = new Date((b as any).createdAt || (b as any).created_at || 0).getTime();
+        return timeB - timeA; // yangilari birinchi
+      }
+      if (order === "productPrice") {
+        const priceA = (a as any).productPrice ?? (a as any).price ?? 0;
+        const priceB = (b as any).productPrice ?? (b as any).price ?? 0;
+        return priceA - priceB; // arzonidan qimmatiga
+      }
+      if (order === "productViews") {
+        const viewsA = (a as any).productViews ?? (a as any).product_views ?? 0;
+        const viewsB = (b as any).productViews ?? (b as any).product_views ?? 0;
+        return viewsB - viewsA; // mashhurlari birinchi
+      }
+      return 0;
+    });
+
+    return result;
+  }, [products, productSearch.productCollection, productSearch.search, productSearch.order]);
+
+  /** Paginated products */
+  const paginatedProducts = useMemo(() => {
+    const start = (productSearch.page - 1) * productSearch.limit;
+    return filteredProducts.slice(start, start + productSearch.limit);
+  }, [filteredProducts, productSearch.page, productSearch.limit]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / productSearch.limit));
 
   /** HANDLERS */
 
   const searchCollectionHandler = (colletion: ProductCollection) => {
-    productSearch.page = 1;
-    productSearch.productCollection = colletion;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      productCollection: colletion,
+    }));
   };
 
   const searchOrderHandler = (order: string) => {
-    productSearch.page = 1;
-    productSearch.order = order;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      order,
+    }));
   };
 
   const searchProductHandler = () => {
-    productSearch.search = searchText;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({
+      ...prev,
+      page: 1,
+      search: searchText,
+    }));
   };
 
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
-    productSearch.page = value;
-    setProductSearch({ ...productSearch });
+    setProductSearch((prev) => ({ ...prev, page: value }));
   };
 
   const chooseDishHandler = (product: Product) => {
@@ -190,39 +249,57 @@ export default function Products(props: ProductProps) {
           </Box>
         </Box>
 
-        {/* Sort Options */}
+        {/* Sort Options - Yangi, Narx, Mashhur */}
         <Box className="mobile-sort-section">
           <Chip
             label={t("new")}
-            onClick={() => searchOrderHandler("createdAt")}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              searchOrderHandler("createdAt");
+            }}
             className={`mobile-sort-chip ${
               productSearch.order === "createdAt" ? "active" : ""
             }`}
             size="small"
+            sx={{ cursor: "pointer" }}
+            component="button"
           />
           <Chip
             label={t("price")}
-            onClick={() => searchOrderHandler("productPrice")}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              searchOrderHandler("productPrice");
+            }}
             className={`mobile-sort-chip ${
               productSearch.order === "productPrice" ? "active" : ""
             }`}
             size="small"
+            sx={{ cursor: "pointer" }}
+            component="button"
           />
           <Chip
             label={t("popular")}
-            onClick={() => searchOrderHandler("productViews")}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              searchOrderHandler("productViews");
+            }}
             className={`mobile-sort-chip ${
               productSearch.order === "productViews" ? "active" : ""
             }`}
             size="small"
+            sx={{ cursor: "pointer" }}
+            component="button"
           />
         </Box>
 
         {/* Products Grid */}
         <Box className="mobile-products-container">
-          {products.length !== 0 ? (
+          {paginatedProducts.length !== 0 ? (
             <Box className="mobile-products-grid">
-              {products.map((product: Product) => {
+              {paginatedProducts.map((product: Product) => {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 const sizeVolume =
                   product.productCollection === ProductCollection.DRINK
@@ -297,11 +374,7 @@ export default function Products(props: ProductProps) {
         {/* Pagination */}
         <Box className="mobile-pagination">
           <Pagination
-            count={
-              products.length !== 0
-                ? productSearch.page + 1
-                : productSearch.page
-            }
+            count={totalPages}
             page={productSearch.page}
             renderItem={(item) => (
               <PaginationItem
@@ -360,6 +433,7 @@ export default function Products(props: ProductProps) {
               </Stack>
               <Stack className="dishes-filter-section">
                 <Button
+                  type="button"
                   variant={"contained"}
                   color={
                     productSearch.order === "createdAt"
@@ -369,9 +443,10 @@ export default function Products(props: ProductProps) {
                   className={"order"}
                   onClick={() => searchOrderHandler("createdAt")}
                 >
-                  New
+                  {t("new")}
                 </Button>
                 <Button
+                  type="button"
                   variant={"contained"}
                   color={
                     productSearch.order === "productPrice"
@@ -381,9 +456,10 @@ export default function Products(props: ProductProps) {
                   className={"order"}
                   onClick={() => searchOrderHandler("productPrice")}
                 >
-                  Price
+                  {t("price")}
                 </Button>
                 <Button
+                  type="button"
                   variant={"contained"}
                   color={
                     productSearch.order === "productViews"
@@ -394,7 +470,7 @@ export default function Products(props: ProductProps) {
                   sx={{ marginRight: "56px" }}
                   onClick={() => searchOrderHandler("productViews")}
                 >
-                  Views
+                  {t("popular")}
                 </Button>
               </Stack>
               <Stack className="list-category-section">
@@ -423,8 +499,8 @@ export default function Products(props: ProductProps) {
                   ))}
                 </Stack>
                 <Stack className="product-wrapper">
-                  {products.length !== 0 ? (
-                    products.map((product: Product) => {
+                  {paginatedProducts.length !== 0 ? (
+                    paginatedProducts.map((product: Product) => {
                       const imagePath = `${serverApi}/${product.productImages[0]}`;
                       const sizeVolume =
                         product.productCollection === ProductCollection.DRINK
@@ -496,11 +572,7 @@ export default function Products(props: ProductProps) {
               <Stack className="pagination-section">
                 <Stack spacing={2}>
                   <Pagination
-                    count={
-                      products.length !== 0
-                        ? productSearch.page + 1
-                        : productSearch.page
-                    }
+                    count={totalPages}
                     page={productSearch.page}
                     renderItem={(item) => (
                       <PaginationItem

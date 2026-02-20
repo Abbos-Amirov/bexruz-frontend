@@ -1,11 +1,10 @@
 import React from "react";
 import { Box, Button, Stack } from "@mui/material";
-import TabPanel from "@mui/lab/TabPanel";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi } from "../../../lib/config";
 import { retrieveFinishedOrders } from "./selector";
 import { useGlobals } from "../../hooks/useGlobals";
 import { T } from "../../../lib/types/common";
@@ -25,15 +24,12 @@ const finishedOrdersRetriever = createSelector(
 
 export default function FinishedOrders() {
   const { finishedOrders } = useSelector(finishedOrdersRetriever);
-  const { authTable, setOrderBulder } = useGlobals();
+  const { setOrderBulder } = useGlobals();
   const device = useDeviceDetect();
 
   /** HANDLERS **/
   const complatedOrderHandler = async (e: T) => {
     try {
-      if (!authTable) throw new Error(Messages.error2);
-      //  PAYMENT PROCESS
-
       const orderId = e.target.value;
       const input: OrderUpdateInput = {
         orderId: orderId,
@@ -56,7 +52,7 @@ export default function FinishedOrders() {
   };
   if (device === "mobile") {
     return (
-      <TabPanel value="3">
+      <Box>
         <Box className="mobile-orders-list">
           {finishedOrders && finishedOrders.length > 0 ? (
             finishedOrders.map((order: Order) => (
@@ -109,9 +105,8 @@ export default function FinishedOrders() {
                   </Box>
                 </Box>
 
-                {/* Payment Button (only for table) */}
-                {authTable && (
-                  <Box className="mobile-order-actions">
+                {/* Payment Button */}
+                <Box className="mobile-order-actions">
                     <Button
                       value={order._id}
                       variant="contained"
@@ -123,7 +118,6 @@ export default function FinishedOrders() {
                       Payment
                     </Button>
                   </Box>
-                )}
               </Box>
             ))
           ) : (
@@ -133,12 +127,12 @@ export default function FinishedOrders() {
             </Box>
           )}
         </Box>
-      </TabPanel>
+      </Box>
     );
   }
 
   return (
-    <TabPanel value="3">
+    <Box>
       <Stack>
         {finishedOrders?.map((order: Order) => {
           return (
@@ -173,8 +167,7 @@ export default function FinishedOrders() {
                     <img src={"/icons/pause.svg"} />
                     <p>Total</p>
                     <p>${order.orderTotal}</p>
-                    {authTable && (
-                      <Button
+                    <Button
                         value={order._id}
                         variant="contained"
                         className="verify-button"
@@ -182,7 +175,6 @@ export default function FinishedOrders() {
                       >
                         payment
                       </Button>
-                    )}
                   </Box>
                 </Box>
               </Box>
@@ -205,6 +197,6 @@ export default function FinishedOrders() {
             </Box>
           ))}
       </Stack>
-    </TabPanel>
+    </Box>
   );
 }
