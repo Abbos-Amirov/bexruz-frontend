@@ -27,6 +27,7 @@ import { setProducts } from "./slice";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { retrieveProducts } from "./selector";
 import ProductService from "../../services/ProductService";
+import { CURRENCY_SYMBOL } from "../../../lib/config";
 import { ProductCollection } from "../../../lib/enums/product.enums";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
@@ -145,13 +146,13 @@ export default function Products(props: ProductProps) {
         return timeB - timeA; // yangilari birinchi
       }
       if (order === "productPrice") {
-        const priceA = (a as any).productPrice ?? (a as any).price ?? 0;
-        const priceB = (b as any).productPrice ?? (b as any).price ?? 0;
+        const priceA = Number((a as any).productPrice ?? (a as any).product_price ?? (a as any).price ?? 0) || 0;
+        const priceB = Number((b as any).productPrice ?? (b as any).product_price ?? (b as any).price ?? 0) || 0;
         return priceA - priceB; // arzonidan qimmatiga
       }
       if (order === "productViews") {
-        const viewsA = (a as any).productViews ?? (a as any).product_views ?? 0;
-        const viewsB = (b as any).productViews ?? (b as any).product_views ?? 0;
+        const viewsA = Number((a as any).productViews ?? (a as any).product_views ?? 0) || 0;
+        const viewsB = Number((b as any).productViews ?? (b as any).product_views ?? 0) || 0;
         return viewsB - viewsA; // mashhurlari birinchi
       }
       return 0;
@@ -253,45 +254,36 @@ export default function Products(props: ProductProps) {
         <Box className="mobile-sort-section">
           <Chip
             label={t("new")}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              searchOrderHandler("createdAt");
-            }}
+            onClick={() => searchOrderHandler("createdAt")}
             className={`mobile-sort-chip ${
               productSearch.order === "createdAt" ? "active" : ""
             }`}
             size="small"
             sx={{ cursor: "pointer" }}
             component="button"
+            type="button"
           />
           <Chip
             label={t("price")}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              searchOrderHandler("productPrice");
-            }}
+            onClick={() => searchOrderHandler("productPrice")}
             className={`mobile-sort-chip ${
               productSearch.order === "productPrice" ? "active" : ""
             }`}
             size="small"
             sx={{ cursor: "pointer" }}
             component="button"
+            type="button"
           />
           <Chip
             label={t("popular")}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              searchOrderHandler("productViews");
-            }}
+            onClick={() => searchOrderHandler("productViews")}
             className={`mobile-sort-chip ${
               productSearch.order === "productViews" ? "active" : ""
             }`}
             size="small"
             sx={{ cursor: "pointer" }}
             component="button"
+            type="button"
           />
         </Box>
 
@@ -349,7 +341,7 @@ export default function Products(props: ProductProps) {
                       <Box className="mobile-product-footer">
                         <Box className="mobile-product-price">
                           <MonetizationOnIcon className="mobile-price-icon" />
-                          <span>${product.productPrice}</span>
+                          <span>{CURRENCY_SYMBOL}{product.productPrice}</span>
                         </Box>
                         <Badge
                           badgeContent={product.productViews}
@@ -558,7 +550,7 @@ export default function Products(props: ProductProps) {
                             </span>
                             <div className="product-desc">
                               <MonetizationOnIcon />
-                              {product.productPrice}
+                              {CURRENCY_SYMBOL}{product.productPrice}
                             </div>
                           </Box>
                         </Stack>

@@ -48,11 +48,11 @@ export default function Footer() {
           <Box className="mobile-footer-contact">
             <div className="mobile-footer-contact-item">
               <span>L.</span>
-              <span>Amir Temur Street, Tashkent</span>
+              <span>충청남도 천안시 동남구 터미널4길 26</span>
             </div>
             <div className="mobile-footer-contact-item">
               <span>P.</span>
-              <span>+998 90 123 45 67</span>
+              <span>070-4833-1959</span>
             </div>
             <div className="mobile-footer-contact-item">
               <span>E.</span>
@@ -133,11 +133,11 @@ export default function Footer() {
                 >
                   <Box flexDirection={"row"} className={"find-us"}>
                     <span>L.</span>
-                    <div>Amir Temur Street, Tashkent</div>
+                    <div>충청남도 천안시 동남구 터미널4길 26</div>
                   </Box>
                   <Box className={"find-us"}>
                     <span>P.</span>
-                    <div>+998 90 123 45 67</div>
+                    <div>070-4833-1959</div>
                   </Box>
                   <Box className={"find-us"}>
                     <span>E.</span>

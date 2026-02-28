@@ -20,10 +20,13 @@ import QrLanding from "./components/qrLanding";
 import TableService from "./services/TableService";
 import CallButton from "./components/callWaiter";
 import { AddToCartAnimationProvider } from "./context/AddToCartAnimation";
+import WelcomeLanding, { isWelcomeCompleted } from "./components/welcomeLanding";
 
 export default function App() {
   const location = useLocation();
   const history = useHistory();
+  const showWelcome =
+    !isWelcomeCompleted() && !location.pathname.startsWith("/table/qr/");
   const { setAuthMember, authMember, authTable, setAuthTable } = useGlobals();
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
   const [signupOpen, setSignupOpen] = useState<boolean>(false);
@@ -86,6 +89,10 @@ export default function App() {
       sweetErrorHandling(err).then();
     }
   };
+
+  if (showWelcome) {
+    return <WelcomeLanding />;
+  }
 
   return (
     <AddToCartAnimationProvider>

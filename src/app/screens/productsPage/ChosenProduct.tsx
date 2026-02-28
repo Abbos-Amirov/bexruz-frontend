@@ -21,7 +21,7 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
-import { serverApi } from "../../../lib/config";
+import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
 import { CartItem } from "../../../lib/types/search";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useAddToCartAnimation } from "../../context/AddToCartAnimation";
@@ -192,7 +192,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
             <Box className="mobile-product-detail-price">
               <MonetizationOnIcon className="mobile-price-icon-large" />
               <Typography className="mobile-price-amount">
-                ${chosenProduct?.productPrice}
+                {CURRENCY_SYMBOL}{chosenProduct?.productPrice}
               </Typography>
             </Box>
           </Box>
@@ -323,7 +323,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
                   <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                     <MonetizationOnIcon sx={{ color: "#3776CC", fontSize: 28 }} />
                     <Typography sx={{ fontWeight: 700, fontSize: 28, color: "#3776CC" }}>
-                      ${chosenProduct?.productPrice}
+                      {CURRENCY_SYMBOL}{chosenProduct?.productPrice}
                     </Typography>
                   </Box>
                 </Box>

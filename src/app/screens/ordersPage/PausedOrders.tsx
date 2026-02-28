@@ -6,7 +6,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/order";
 import { Product } from "../../../lib/types/product";
-import { serverApi } from "../../../lib/config";
+import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { OrderStatus, PaymentStatus } from "../../../lib/enums/order.enum";
 import { useGlobals } from "../../hooks/useGlobals";
@@ -99,13 +99,13 @@ export default function PausedOrders() {
                           </Typography>
                           <Box className="mobile-order-item-price-row">
                             <Typography className="mobile-order-item-price">
-                              ${item.itemPrice}
+                              {CURRENCY_SYMBOL}{item.itemPrice}
                             </Typography>
                             <Typography className="mobile-order-item-quantity">
                               x {item.itemQuantity}
                             </Typography>
                             <Typography className="mobile-order-item-total">
-                              ${(item.itemQuantity * item.itemPrice).toFixed(2)}
+                              {CURRENCY_SYMBOL}{(item.itemQuantity * item.itemPrice).toFixed(2)}
                             </Typography>
                           </Box>
                         </Box>
@@ -118,15 +118,15 @@ export default function PausedOrders() {
                 <Box className="mobile-order-summary">
                   <Box className="mobile-order-summary-row">
                     <Typography>Product price</Typography>
-                    <Typography>${(order.orderTotal - order.orderDelivery).toFixed(2)}</Typography>
+                    <Typography>{CURRENCY_SYMBOL}{(order.orderTotal - order.orderDelivery).toFixed(2)}</Typography>
                   </Box>
                   <Box className="mobile-order-summary-row">
                     <Typography>Delivery cost</Typography>
-                    <Typography>${order.orderDelivery.toFixed(2)}</Typography>
+                    <Typography>{CURRENCY_SYMBOL}{order.orderDelivery.toFixed(2)}</Typography>
                   </Box>
                   <Box className="mobile-order-summary-total">
                     <Typography>Total</Typography>
-                    <Typography>${order.orderTotal.toFixed(2)}</Typography>
+                    <Typography>{CURRENCY_SYMBOL}{order.orderTotal.toFixed(2)}</Typography>
                   </Box>
                 </Box>
 
@@ -181,11 +181,11 @@ export default function PausedOrders() {
                       <img src={imagePath} className="order-dish-img" />
                       <p className="title-dish">{product.productName}</p>
                       <Box className="price-box">
-                        <p>${item.itemPrice}</p>
+                        <p>{CURRENCY_SYMBOL}{item.itemPrice}</p>
                         <img src={"/icons/close.svg"} />
                         <p>{item.itemQuantity}</p>
                         <img src="/icons/pause.svg" />
-                        <p>${item.itemQuantity * item.itemPrice}</p>
+                        <p>{CURRENCY_SYMBOL}{item.itemQuantity * item.itemPrice}</p>
                       </Box>
                     </Box>
                   );
@@ -193,13 +193,13 @@ export default function PausedOrders() {
                 <Box className="total-price-box">
                   <Box className="box-total">
                     <p>Product price</p>
-                    <p>${order.orderTotal - order.orderDelivery}</p>
+                    <p>{CURRENCY_SYMBOL}{order.orderTotal - order.orderDelivery}</p>
                     <img src={"/icons/plus.svg"} />
                     <p>delivery cost</p>
-                    <p>${order.orderDelivery}</p>
+                    <p>{CURRENCY_SYMBOL}{order.orderDelivery}</p>
                     <img src={"/icons/pause.svg"} />
                     <p>Total</p>
-                    <p>${order.orderTotal}</p>
+                    <p>{CURRENCY_SYMBOL}{order.orderTotal}</p>
                   </Box>
                   <Button
                     value={order._id}

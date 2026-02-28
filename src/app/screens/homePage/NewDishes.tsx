@@ -12,7 +12,7 @@ import { createSelector } from "reselect";
 import { retrieveNewDishes } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { ProductCollection } from "../../../lib/enums/product.enums";
-import { serverApi } from "../../../lib/config";
+import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
 
 /** REDUX SLICE & SELECTOR */
 
@@ -53,7 +53,7 @@ export default function NewDishes() {
                             </Typography>
                             <Divider width="2" height="24" bg="#d9d9d9" />
                             <Typography className="price">
-                              {product.productPrice}
+                              {CURRENCY_SYMBOL}{product.productPrice}
                             </Typography>
                           </Stack>
                           <Stack>

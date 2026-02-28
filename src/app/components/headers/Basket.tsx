@@ -9,7 +9,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CloseIcon from "@mui/icons-material/Close";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
-import { serverApi } from "../../../lib/config";
+import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
@@ -149,7 +149,7 @@ export default function Basket(props: BasketProps) {
                         <Box className={"mobile-product-info"}>
                           <span className={"mobile-product-name"}>{item.name}</span>
                           <span className={"mobile-product-price"}>
-                            ${item.price} x {item.quantity}
+                            {CURRENCY_SYMBOL}{item.price} x {item.quantity}
                           </span>
                         </Box>
                         <Box className={"mobile-product-actions"}>
@@ -187,7 +187,7 @@ export default function Basket(props: BasketProps) {
             {cartItems.length !== 0 && (
               <Box className={"mobile-basket-footer"}>
                 <span className={"mobile-basket-total"}>
-                  Total: ${totalPrice}
+                  Total: {CURRENCY_SYMBOL}{totalPrice}
                 </span>
                 <Button
                   startIcon={<ShoppingCartIcon />}
@@ -284,7 +284,7 @@ export default function Basket(props: BasketProps) {
                     <img src={imagePath} className={"product-img"} />
                     <span className={"product-name"}>{item.name}</span>
                     <p className={"product-price"}>
-                      ${item.price} x {item.quantity}
+                      {CURRENCY_SYMBOL}{item.price} x {item.quantity}
                     </p>
                     <Box sx={{ minWidth: 120 }}>
                       <div className="col-2">
@@ -307,7 +307,7 @@ export default function Basket(props: BasketProps) {
           {cartItems.length !== 0 ? (
             <Box className={"basket-order"}>
               <span className={"price"}>
-                Total: ${totalPrice} ({itemsPrice} +{shippingCost})
+                Total: {CURRENCY_SYMBOL}{totalPrice} ({CURRENCY_SYMBOL}{itemsPrice} + {CURRENCY_SYMBOL}{shippingCost})
               </span>
               <Button
                 startIcon={<ShoppingCartIcon />}

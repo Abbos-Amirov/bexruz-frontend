@@ -2,6 +2,8 @@ export const serverApi: string = process.env.REACT_APP_API_URL || "http://localh
 
 export const RESTAURANT_NAME = "Zomin";
 
+export const CURRENCY_SYMBOL = "₩"; // Won
+
 export const Messages = {
   error1: "Somthing went wrong!",
   error2: "Please login first!",

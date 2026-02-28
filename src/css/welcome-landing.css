@@ -1,0 +1,173 @@
+/* Welcome Landing - Zomin Restaurant */
+
+.welcome-landing {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+}
+
+.welcome-landing-content {
+  text-align: center;
+  padding: 2rem;
+  max-width: 480px;
+}
+
+/* Logo */
+.welcome-logo {
+  margin-bottom: 2rem;
+}
+
+.welcome-logo img {
+  width: 120px;
+  height: auto;
+  filter: brightness(1.1);
+}
+
+/* Welcome phase */
+.welcome-title-uz {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #e8d5b7;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+.welcome-subtitle-uz {
+  font-size: 1.1rem;
+  color: rgba(232, 213, 183, 0.9);
+  margin: 0 0 1.5rem;
+  font-weight: 400;
+}
+
+.welcome-title-en {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #d4af37;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.welcome-subtitle-en {
+  font-size: 1rem;
+  color: rgba(212, 175, 55, 0.9);
+  margin: 0 0 2rem;
+}
+
+.welcome-continue-btn {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #d4af37;
+  background: transparent;
+  color: #d4af37;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.welcome-continue-btn:hover {
+  background: #d4af37;
+  color: #1a1a2e;
+  transform: translateY(-2px);
+}
+
+/* Language selection phase */
+.welcome-lang-title {
+  margin-bottom: 2rem;
+}
+
+.welcome-lang-title-item {
+  font-size: 1.25rem;
+  color: rgba(232, 213, 183, 0.95);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.welcome-lang-title-item:last-child {
+  margin-bottom: 0;
+}
+
+.welcome-lang-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.welcome-lang-btn {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #e8d5b7;
+  background: rgba(232, 213, 183, 0.08);
+  color: #e8d5b7;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 140px;
+}
+
+.welcome-lang-btn:hover {
+  background: rgba(212, 175, 55, 0.3);
+  border-color: #d4af37;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+}
+
+/* Dark mode support */
+.dark-mode .welcome-landing {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.dark-mode .welcome-title-uz,
+.dark-mode .welcome-subtitle-uz,
+.dark-mode .welcome-lang-title-item {
+  color: #e8d5b7;
+}
+
+.dark-mode .welcome-continue-btn,
+.dark-mode .welcome-lang-btn {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+.dark-mode .welcome-lang-btn:hover {
+  background: rgba(212, 175, 55, 0.25);
+  color: #fff;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .welcome-landing-content {
+    padding: 1.5rem;
+  }
+
+  .welcome-title-uz {
+    font-size: 1.85rem;
+  }
+
+  .welcome-subtitle-uz {
+    font-size: 1rem;
+  }
+
+  .welcome-title-en {
+    font-size: 1.5rem;
+  }
+
+  .welcome-lang-title-item {
+    font-size: 1.1rem;
+  }
+
+  .welcome-lang-btn {
+    min-width: 100%;
+    padding: 1rem;
+  }
+}
