@@ -50,17 +50,17 @@ export default function WelcomeLanding() {
         {phase === "welcome" ? (
           <>
             <div className="welcome-logo">
-              <img src="/icons/zomin.svg" alt="Zomin" />
+              <img src="/icons/zomin.svg" alt="Client" />
             </div>
             <h1 className="welcome-title-uz">
               Xush kelibsiz!
             </h1>
             <p className="welcome-subtitle-uz">
-              Siz Zomin oshxonasiga xush kelibsiz
+              Siz oshxonasiga xush kelibsiz
             </p>
             <h2 className="welcome-title-en">Welcome!</h2>
             <p className="welcome-subtitle-en">
-              Welcome to Zomin Restaurant
+            Welcome to  Restaurant
             </p>
             <button className="welcome-continue-btn" onClick={handleContinue}>
               Davom etish / Continue

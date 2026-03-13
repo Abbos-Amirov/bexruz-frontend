@@ -98,7 +98,7 @@ export default function Footer() {
               <img width={"100px"} src={"/icons/zomin.svg"} />
             </Box>
             <Box className={"foot-desc-txt"}>
-              Celebrating the spirit of Uzbekistan, Zomin Restaurant brings
+              Celebrating the spirit of Uzbekistan
               authentic flavors of plov, kebabs, and traditional dishes to your
               table. A place where culture meets taste.
             </Box>
@@ -157,7 +157,7 @@ export default function Footer() {
           sx={{ mt: "80px" }}
         ></Stack>
         <Stack className={"copyright-txt"}>
-          © {new Date().getFullYear()} Zomin Restaurant. {t("allRightsReserved")}.
+          © {new Date().getFullYear()} {RESTAURANT_NAME}. {t("allRightsReserved")}.
         </Stack>
       </Container>
     </Footers>
