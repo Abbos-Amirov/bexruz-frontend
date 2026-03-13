@@ -14,6 +14,7 @@ import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { Typography } from "@mui/material";
 import PaymentIcon from "@mui/icons-material/Payment";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useLanguage } from "../../context/LanguageContext";
 
 /** REDUX SLICE & SELECTOR */
 
@@ -26,6 +27,7 @@ export default function FinishedOrders() {
   const { finishedOrders } = useSelector(finishedOrdersRetriever);
   const { setOrderBulder } = useGlobals();
   const device = useDeviceDetect();
+  const { t } = useLanguage();
 
   /** HANDLERS **/
   const complatedOrderHandler = async (e: T) => {
@@ -115,7 +117,7 @@ export default function FinishedOrders() {
                       onClick={complatedOrderHandler}
                       fullWidth
                     >
-                      Payment
+                      {t("payment")}
                     </Button>
                   </Box>
               </Box>
@@ -123,7 +125,7 @@ export default function FinishedOrders() {
           ) : (
             <Box className="mobile-no-orders">
               <img src="/icons/noimage-list.svg" alt="No orders" />
-              <Typography>No finished orders</Typography>
+              <Typography>{t("noFinishedOrders")}</Typography>
             </Box>
           )}
         </Box>
@@ -173,7 +175,7 @@ export default function FinishedOrders() {
                         className="verify-button"
                         onClick={complatedOrderHandler}
                       >
-                        payment
+                        {t("payment")}
                       </Button>
                   </Box>
                 </Box>

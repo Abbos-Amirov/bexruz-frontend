@@ -62,6 +62,10 @@ export const translations: Record<Language, Record<string, string>> = {
     pausedOrdersTitle: "To'xtatilgan buyurtmalar",
     noPausedOrders: "To'xtatilgan buyurtmalar yo'q",
     orderReady: "Buyurtmaga tayyor",
+    call: "Chaqiruv",
+    verify: "Buyurtma berish",
+    noProcessingOrders: "Jarayondagi buyurtmalar yo'q",
+    noFinishedOrders: "Tugatilgan buyurtmalar yo'q",
   },
   ko: {
     menu: "메뉴",
@@ -124,6 +128,10 @@ export const translations: Record<Language, Record<string, string>> = {
     orderReady: "주문 준비 완료",
     pausedOrdersTitle: "일시중지 주문",
     noPausedOrders: "일시중지된 주문이 없습니다",
+    call: "전화",
+    verify: "확인",
+    noProcessingOrders: "처리 중인 주문이 없습니다",
+    noFinishedOrders: "완료된 주문이 없습니다",
   },
   en: {
     menu: "Menu",
@@ -186,6 +194,10 @@ export const translations: Record<Language, Record<string, string>> = {
     orderReady: "Ready for order",
     pausedOrdersTitle: "Paused Orders",
     noPausedOrders: "No paused orders",
+    call: "Call",
+    verify: "Verify",
+    noProcessingOrders: "No processing orders",
+    noFinishedOrders: "No finished orders",
   },
   ru: {
     menu: "Меню",
@@ -248,5 +260,9 @@ export const translations: Record<Language, Record<string, string>> = {
     orderReady: "Готово к заказу",
     pausedOrdersTitle: "Приостановленные заказы",
     noPausedOrders: "Нет приостановленных заказов",
+    call: "Позвонить",
+    verify: "Подтвердить",
+    noProcessingOrders: "Нет заказов в обработке",
+    noFinishedOrders: "Нет завершённых заказов",
   },
 };

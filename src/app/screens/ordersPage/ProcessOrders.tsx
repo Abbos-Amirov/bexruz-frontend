@@ -18,6 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import PhoneIcon from "@mui/icons-material/Phone";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useLanguage } from "../../context/LanguageContext";
 
 /** REDUX SLICE & SELECTOR */
 
@@ -38,6 +39,7 @@ interface ProcessOrdersProps {
 export default function ProcessOrders(props: ProcessOrdersProps) {
   const { callHandler } = props;
   const { setOrderBulder, authTable } = useGlobals();
+  const { t } = useLanguage();
   const { processOrders } = useSelector(processOrdersRetriever);
   const { pendingOrders } = useSelector(pendingOrdersRetriever);
   const device = useDeviceDetect();
@@ -151,7 +153,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                     onClick={deleteOrderHandler}
                     disabled={order.orderStatus !== OrderStatus.PENDING}
                   >
-                    Cancel
+                    {t("cancel")}
                   </Button>
                   <Button
                     value={order._id}
@@ -166,7 +168,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                       }
                     }}
                   >
-                    {authTable ? "Call" : "Verify"}
+                    {authTable ? t("call") : t("verify")}
                   </Button>
                 </Box>
               </Box>
@@ -174,7 +176,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
           ) : (
             <Box className="mobile-no-orders">
               <img src="/icons/noimage-list.svg" alt="No orders" />
-              <Typography>No processing orders</Typography>
+              <Typography>{t("noProcessingOrders")}</Typography>
             </Box>
           )}
         </Box>
@@ -231,7 +233,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                     onClick={deleteOrderHandler}
                     disabled={order.orderStatus !== OrderStatus.PENDING}
                   >
-                    cancel
+                    {t("cancel")}
                   </Button>
                   <Button
                     value={order._id}
@@ -245,7 +247,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                       }
                     }}
                   >
-                    {authTable ? "Call" : "Verify"}
+                    {authTable ? t("call") : t("verify")}
                   </Button>
                 </Box>
               </Box>

@@ -144,7 +144,7 @@ export default function PausedOrders() {
                     startIcon={<DeleteIcon />}
                     onClick={deleteOrderHandler}
                   >
-                    Cancel
+                    {t("cancel")}
                   </Button>
                   <Button
                     value={order._id}
@@ -153,7 +153,7 @@ export default function PausedOrders() {
                     startIcon={<ShoppingCartIcon />}
                     onClick={processOrderHandler}
                   >
-                    {authMember ? "Payment" : "Order"}
+                    {authMember ? t("payment") : t("order")}
                   </Button>
                 </Box>
               </Box>
