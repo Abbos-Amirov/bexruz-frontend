@@ -3,9 +3,9 @@
   <text x="50%" y="70" text-anchor="middle" font-family="Times New Roman, serif"
         font-weight="bold" font-size="40" fill="#b08d57">─ UZBEK ─</text>
   
-  <!-- Main NAVRUZ text -->
+  <!-- Main BEXRUZ text -->
   <text x="50%" y="200" text-anchor="middle" font-family="Times New Roman, serif"
-        font-weight="bold" font-size="120" fill="#d4af7f">NAVRUZ</text>
+        font-weight="bold" font-size="120" fill="#d4af7f">BEXRUZ</text>
   
   <!-- Bottom CUISINE text -->
   <text x="50%" y="300" text-anchor="middle" font-family="Times New Roman, serif"

@@ -50,7 +50,7 @@ export default function WelcomeLanding() {
         {phase === "welcome" ? (
           <>
             <div className="welcome-logo">
-              <img src="/icons/zomin.svg" alt="Client" />
+              <img src="/icons/zomin.svg" alt="BEXRUZ" />
             </div>
             <h1 className="welcome-title-uz">
               Xush kelibsiz!

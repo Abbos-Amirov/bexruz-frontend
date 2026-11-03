@@ -1,6 +1,6 @@
 export const serverApi: string = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-export const RESTAURANT_NAME = "Client";
+export const RESTAURANT_NAME = "BEXRUZ";
 
 export const CURRENCY_SYMBOL = "₩"; // Won
 

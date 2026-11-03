@@ -396,7 +396,7 @@ export default function Products(props: ProductProps) {
                 width={"100%"}
               >
                 <Stack className="avatar-big-box">
-                  <Box className="top-text">Client</Box>
+                  <Box className="top-text">BEXRUZ</Box>
                   <Stack flexDirection={"row"} alignItems={"center"}>
                     <input
                       type="search"
