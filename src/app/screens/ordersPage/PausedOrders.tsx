@@ -80,7 +80,7 @@ export default function PausedOrders() {
   if (device === "mobile") {
     return (
       <Box>
-        <Typography variant="h6" sx={{ fontWeight: 700, mb: 2, color: "#333" }}>
+        <Typography className="bx-section-title">
           {t("pausedOrdersTitle")}
         </Typography>
         <Box className="mobile-orders-list">

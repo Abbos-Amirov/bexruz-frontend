@@ -55,6 +55,7 @@ export default function FinishedOrders() {
   if (device === "mobile") {
     return (
       <Box>
+        <Typography className="bx-section-title">{t("finishedOrdersTitle")}</Typography>
         <Box className="mobile-orders-list">
           {finishedOrders && finishedOrders.length > 0 ? (
             finishedOrders.map((order: Order) => (

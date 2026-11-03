@@ -7,167 +7,169 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(225, 29, 46, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(122, 10, 20, 0.35) 0%, transparent 60%),
+    var(--bx-black);
+  color: var(--bx-on-dark);
+  font-family: var(--bx-font);
+}
+
+/* nozik to'r fon */
+.welcome-landing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  pointer-events: none;
 }
 
 .welcome-landing-content {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 2rem 1.5rem;
   text-align: center;
-  padding: 2rem;
-  max-width: 480px;
+  animation: welcomeIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Logo */
+@keyframes welcomeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .welcome-logo {
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .welcome-logo img {
-  width: 120px;
-  height: auto;
-  filter: brightness(1.1);
+  height: 44px;
+  width: auto;
 }
 
-/* Welcome phase */
 .welcome-title-uz {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 2.25rem;
-  font-weight: 600;
-  color: #e8d5b7;
-  margin: 0 0 0.5rem;
-  letter-spacing: 0.02em;
+  font-family: var(--bx-font-display);
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 0.75rem;
 }
 
 .welcome-subtitle-uz {
-  font-size: 1.1rem;
-  color: rgba(232, 213, 183, 0.9);
-  margin: 0 0 1.5rem;
-  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--bx-on-dark-muted);
+  margin: 0 0 2rem;
+  font-weight: 500;
 }
 
 .welcome-title-en {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: #d4af37;
-  margin: 0 0 0.5rem;
-  letter-spacing: 0.05em;
+  display: inline-block;
+  font-family: var(--bx-font);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bx-red);
+  margin: 0 0 0.35rem;
 }
 
 .welcome-subtitle-en {
-  font-size: 1rem;
-  color: rgba(212, 175, 55, 0.9);
-  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: var(--bx-on-dark-muted);
+  margin: 0 0 2.5rem;
 }
 
 .welcome-continue-btn {
-  padding: 0.875rem 2rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  font-family: var(--bx-font);
   font-size: 1rem;
-  font-weight: 600;
-  border: 2px solid #d4af37;
-  background: transparent;
-  color: #d4af37;
-  border-radius: 8px;
+  font-weight: 800;
+  border: none;
+  background: var(--bx-red);
+  color: #fff;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  box-shadow: 0 14px 32px rgba(225, 29, 46, 0.4);
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .welcome-continue-btn:hover {
-  background: #d4af37;
-  color: #1a1a2e;
-  transform: translateY(-2px);
+  background: var(--bx-red-hover);
 }
 
-/* Language selection phase */
+.welcome-continue-btn:active {
+  transform: scale(0.98);
+}
+
+/* Til tanlash */
 .welcome-lang-title {
   margin-bottom: 2rem;
 }
 
 .welcome-lang-title-item {
-  font-size: 1.25rem;
-  color: rgba(232, 213, 183, 0.95);
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--bx-on-dark-muted);
+  margin-bottom: 0.35rem;
   font-weight: 500;
 }
 
-.welcome-lang-title-item:last-child {
-  margin-bottom: 0;
+.welcome-lang-title-item:first-child {
+  font-family: var(--bx-font-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.75rem;
 }
 
 .welcome-lang-buttons {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
-  justify-content: center;
 }
 
 .welcome-lang-btn {
-  padding: 1rem 1.5rem;
+  padding: 1.1rem 1rem;
+  font-family: var(--bx-font);
   font-size: 1rem;
-  font-weight: 600;
-  border: 2px solid #e8d5b7;
-  background: rgba(232, 213, 183, 0.08);
-  color: #e8d5b7;
-  border-radius: 10px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  min-width: 140px;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
 }
 
 .welcome-lang-btn:hover {
-  background: rgba(212, 175, 55, 0.3);
-  border-color: #d4af37;
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+  border-color: var(--bx-red);
+  background: rgba(225, 29, 46, 0.14);
 }
 
-/* Dark mode support */
-.dark-mode .welcome-landing {
-  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #16213e 100%);
+.welcome-lang-btn:active {
+  transform: scale(0.97);
 }
 
-.dark-mode .welcome-title-uz,
-.dark-mode .welcome-subtitle-uz,
-.dark-mode .welcome-lang-title-item {
-  color: #e8d5b7;
-}
-
-.dark-mode .welcome-continue-btn,
-.dark-mode .welcome-lang-btn {
-  border-color: #d4af37;
-  color: #d4af37;
-}
-
-.dark-mode .welcome-lang-btn:hover {
-  background: rgba(212, 175, 55, 0.25);
-  color: #fff;
-}
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-  .welcome-landing-content {
-    padding: 1.5rem;
-  }
-
+@media (max-width: 360px) {
   .welcome-title-uz {
-    font-size: 1.85rem;
+    font-size: 2.2rem;
   }
 
-  .welcome-subtitle-uz {
-    font-size: 1rem;
-  }
-
-  .welcome-title-en {
-    font-size: 1.5rem;
-  }
-
-  .welcome-lang-title-item {
-    font-size: 1.1rem;
-  }
-
-  .welcome-lang-btn {
-    min-width: 100%;
-    padding: 1rem;
+  .welcome-lang-buttons {
+    grid-template-columns: 1fr;
   }
 }

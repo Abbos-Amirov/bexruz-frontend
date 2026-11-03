@@ -21,7 +21,7 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 import ProductService from "../../services/ProductService";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
-import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
+import { serverApi, CURRENCY_SYMBOL, RESTAURANT_NAME } from "../../../lib/config";
 import { CartItem } from "../../../lib/types/search";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useAddToCartAnimation } from "../../context/AddToCartAnimation";
@@ -116,21 +116,7 @@ export default function ChosenProduct(props: ChosenProductProps) {
       <div className="mobile-chosen-product">
         {/* Back Button */}
         <Box
-          sx={{
-            position: "absolute",
-            top: 16,
-            left: 16,
-            zIndex: 20,
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-            color: "#fff",
-            bgcolor: "rgba(0,0,0,0.4)",
-            borderRadius: "12px",
-            px: 1.5,
-            py: 1,
-            cursor: "pointer",
-          }}
+          className="mobile-chosen-back"
           onClick={() => history.push("/products")}
         >
           <ArrowBackIcon fontSize="small" />
@@ -165,11 +151,10 @@ export default function ChosenProduct(props: ChosenProductProps) {
             <Typography className="mobile-product-detail-name">
               {chosenProduct?.productName}
             </Typography>
-            {restaurant?.memberNick && (
-              <Typography className="mobile-product-detail-restaurant">
-                {restaurant.memberNick}
-              </Typography>
-            )}
+            {/* Baza Zomin bilan umumiy, shuning uchun memberNick emas, brend nomi */}
+            <Typography className="mobile-product-detail-restaurant">
+              {RESTAURANT_NAME}
+            </Typography>
           </Box>
 
           {/* Rating & Views */}
@@ -195,19 +180,10 @@ export default function ChosenProduct(props: ChosenProductProps) {
                 {CURRENCY_SYMBOL}{chosenProduct?.productPrice}
               </Typography>
             </Box>
-          </Box>
-
-          {/* Size/Volume Chip */}
-          <Box sx={{ mb: 2 }}>
             <Chip
               label={getSizeVolumeLabel()}
               size="small"
-              sx={{
-                bgcolor: "#3776CC",
-                color: "#fff",
-                fontWeight: 600,
-                fontSize: "12px",
-              }}
+              className="mobile-detail-size-chip"
             />
           </Box>
 

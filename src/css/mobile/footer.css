@@ -1,159 +1,169 @@
-/* Mobile Footer - Clean & Compact */
+/* ============================================
+   FOOTER — doim qora, tepasida qizil chiziq
+   ============================================ */
 
 .mobile-footer {
+  position: relative;
   width: 100%;
-  background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
-  padding: 24px 16px 20px;
-  margin-top: 32px;
+  background: var(--bx-black);
+  color: var(--bx-on-dark);
+  padding: 40px 16px calc(24px + env(safe-area-inset-bottom));
+  margin-top: 40px;
+  border-top: 1px solid var(--bx-on-dark-border);
+}
+
+.mobile-footer::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 64px;
+  height: 3px;
+  background: var(--bx-red);
+  border-radius: 0 0 3px 3px;
+  transform: translateX(-50%);
 }
 
 .mobile-footer-content {
-  max-width: 100%;
+  max-width: var(--bx-max);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* Logo & Brand */
 .mobile-footer-brand {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
 .mobile-footer-logo {
-  width: 48px;
-  height: 48px;
+  height: 34px;
+  width: auto;
   object-fit: contain;
 }
 
+/* Nom logoda bor — takrorlanmasin */
 .mobile-footer-restaurant-name {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  color: #f8f8ff;
-  letter-spacing: 0.5px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
 }
 
 .mobile-footer-tagline {
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  color: #b8b8b8;
+  margin: 0;
+  font-family: var(--bx-font);
+  font-size: 14px;
+  color: var(--bx-on-dark-muted);
   text-align: center;
-  line-height: 1.5;
-  max-width: 280px;
+  line-height: 1.6;
+  max-width: 340px;
 }
 
-/* Quick Links */
 .mobile-footer-links {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px 20px;
+  gap: 8px;
 }
 
 .mobile-footer-links a {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--bx-font);
   font-size: 14px;
-  font-weight: 500;
-  color: #e3c08d;
+  font-weight: 700;
+  color: var(--bx-on-dark);
   text-decoration: none;
-  transition: color 0.2s ease;
+  padding: 8px 16px;
+  border: 1px solid var(--bx-on-dark-border);
+  border-radius: 999px;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.mobile-footer-links a:hover {
-  color: #f8f8ff;
+.mobile-footer-links a:hover,
+.mobile-footer-links a.active {
+  border-color: var(--bx-red);
+  color: #fff;
 }
 
-/* Divider */
 .mobile-footer-divider {
   width: 100%;
+  max-width: 560px;
   height: 1px;
-  background: rgba(215, 182, 134, 0.3);
-  margin: 4px 0;
+  background: var(--bx-on-dark-border);
 }
 
-/* Contact Info */
 .mobile-footer-contact {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
   width: 100%;
-  max-width: 280px;
+  max-width: 340px;
 }
 
 .mobile-footer-contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  color: #e3c08d;
+  gap: 12px;
+  font-family: var(--bx-font);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bx-on-dark);
 }
 
-.mobile-footer-contact-item span {
-  font-weight: 700;
-  color: #d7b686;
-  min-width: 20px;
+.mobile-footer-contact-item span:first-child {
+  flex-shrink: 0;
+  width: 22px;
+  font-weight: 800;
+  color: var(--bx-red);
 }
 
-/* Social Icons */
 .mobile-footer-social {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  padding: 8px 0;
+  gap: 10px;
 }
 
 .mobile-footer-social a {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--bx-on-dark-border);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
-.mobile-footer-social a:active {
-  transform: scale(0.95);
+.mobile-footer-social a:hover {
+  background: var(--bx-red);
+  border-color: var(--bx-red);
 }
 
 .mobile-footer-social img {
-  width: 28px;
-  height: 28px;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 
-/* Copyright */
 .mobile-footer-copyright {
-  font-family: "Poppins", sans-serif;
-  font-size: 11px;
-  color: #888;
+  font-family: var(--bx-font);
+  font-size: 12px;
+  color: var(--bx-on-dark-muted);
+  opacity: 0.7;
   text-align: center;
-  padding-top: 8px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 360px) {
-  .mobile-footer {
-    padding: 20px 12px 16px;
-  }
-
-  .mobile-footer-restaurant-name {
-    font-size: 16px;
-  }
-
-  .mobile-footer-tagline {
-    font-size: 11px;
-  }
-
-  .mobile-footer-contact-item {
-    font-size: 12px;
-  }
-
-  .mobile-footer-social img {
-    width: 24px;
-    height: 24px;
+@media (min-width: 900px) {
+  .mobile-footer-contact {
+    max-width: 760px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 40px;
   }
 }

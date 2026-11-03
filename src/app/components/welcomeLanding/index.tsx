@@ -56,11 +56,11 @@ export default function WelcomeLanding() {
               Xush kelibsiz!
             </h1>
             <p className="welcome-subtitle-uz">
-              Siz oshxonasiga xush kelibsiz
+              BEXRUZ oshxonasiga xush kelibsiz
             </p>
             <h2 className="welcome-title-en">Welcome!</h2>
             <p className="welcome-subtitle-en">
-            Welcome to  Restaurant
+              Welcome to BEXRUZ
             </p>
             <button className="welcome-continue-btn" onClick={handleContinue}>
               Davom etish / Continue

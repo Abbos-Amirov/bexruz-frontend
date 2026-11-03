@@ -1,13 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
-  <!-- Top text with lines -->
-  <text x="50%" y="70" text-anchor="middle" font-family="Times New Roman, serif"
-        font-weight="bold" font-size="40" fill="#b08d57">─ UZBEK ─</text>
-  
+  <text x="50%" y="90" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif"
+        font-weight="700" font-size="34" letter-spacing="10" fill="#e11d2e">UZBEK</text>
   <!-- Main BEXRUZ text -->
-  <text x="50%" y="200" text-anchor="middle" font-family="Times New Roman, serif"
-        font-weight="bold" font-size="120" fill="#d4af7f">BEXRUZ</text>
-  
-  <!-- Bottom CUISINE text -->
-  <text x="50%" y="300" text-anchor="middle" font-family="Times New Roman, serif"
-        font-weight="bold" font-size="60" fill="#f5deb3">CUISINE</text>
+  <text x="50%" y="220" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif"
+        font-weight="800" font-size="120" letter-spacing="10" fill="#f5f5f4">BEXRUZ</text>
+  <text x="50%" y="300" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif"
+        font-weight="700" font-size="40" letter-spacing="16" fill="#a1a1aa">CUISINE</text>
 </svg>

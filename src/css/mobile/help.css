@@ -1,56 +1,80 @@
-/* Mobile Help Page */
+/* ============================================
+   YORDAM sahifasi
+   ============================================ */
+
 .mobile-help-page {
   width: 100%;
+  max-width: 760px;
   min-height: 100vh;
-  background: #f5f5f5;
-  padding: 16px;
-  padding-bottom: 80px;
+  margin: 0 auto;
+  background: var(--bx-bg);
+  padding: 32px 16px 48px;
 }
 
-.mobile-help-title {
-  font-family: "Poppins", sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  color: #2c3e50;
-  text-align: center;
+.mobile-help-page .mobile-help-title {
+  font-family: var(--bx-font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--bx-text);
   margin-bottom: 24px;
 }
 
 .mobile-help-cards {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
+  counter-reset: help-step;
 }
 
 .mobile-help-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  background: var(--bx-surface);
+  border: 1px solid var(--bx-border);
+  border-radius: var(--bx-radius-lg);
+  padding: 20px 20px 20px 68px;
+  counter-increment: help-step;
 }
 
-.mobile-help-card-title {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  color: #2c3e50;
-  margin-bottom: 12px;
+.mobile-help-card::before {
+  content: counter(help-step, decimal-leading-zero);
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--bx-red-soft);
+  color: var(--bx-red);
+  font-family: var(--bx-font);
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.mobile-help-card-title::before {
-  content: "";
-  width: 4px;
-  height: 20px;
-  background: #3776CC;
-  border-radius: 2px;
+.mobile-help-card .mobile-help-card-title {
+  font-family: var(--bx-font);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--bx-text);
+  margin-bottom: 6px;
 }
 
-.mobile-help-card-desc {
-  font-family: "Poppins", sans-serif;
+.mobile-help-card .mobile-help-card-desc {
+  font-family: var(--bx-font);
   font-size: 14px;
-  line-height: 1.6;
-  color: #555;
+  line-height: 1.65;
+  color: var(--bx-muted);
+}
+
+@media (min-width: 900px) {
+  .mobile-help-page {
+    padding-top: 56px;
+  }
+
+  .mobile-help-page .mobile-help-title {
+    font-size: 44px;
+  }
 }

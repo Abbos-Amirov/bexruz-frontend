@@ -1,365 +1,293 @@
-/* Mobile Navbar Styles - Responsive for all phones */
+/* ============================================
+   NAVBAR — doim qora, shaffof blur, qizil urg'u
+   ============================================ */
 
 .other-navbar.mobile-navbar {
   width: 100%;
   height: auto;
-  min-height: 60px;
   display: flex;
-  background: #2c3e50;
+  background: var(--bx-header);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--bx-on-dark-border);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .other-navbar.mobile-navbar .navbar-container {
   width: 100%;
-  margin-top: 0;
+  height: auto;
+  max-width: var(--bx-max);
+  margin: 0 auto;
   padding: 10px 16px;
 }
 
 .other-navbar.mobile-navbar .navbar-container .menu {
-  height: auto;
-  min-height: 50px;
+  min-height: 48px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-}
-
-/* Logo - Small, not too big */
-.other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
-  display: block;
-  width: auto;
-  height: 40px;
-  pointer-events: none;
-  cursor: default;
-  user-select: none;
-}
-
-.other-navbar.mobile-navbar .mobile-navbar-logo {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-}
-
-/* Restaurant name - Large, elegant, on the right */
-.mobile-navbar-restaurant-name {
-  font-size: 18px;
-  font-weight: 700;
-  font-family: "Poppins", "Georgia", serif;
-  color: #f8f8ff;
-  white-space: nowrap;
-  letter-spacing: 1.2px;
-  margin-right: 8px;
-  text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .mobile-navbar-left {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
-.mobile-navbar-right {
-  flex: 1;
-  justify-content: flex-end;
+.other-navbar.mobile-navbar .mobile-navbar-logo,
+.other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
+  display: block;
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
-/* Links container */
 .other-navbar.mobile-navbar .navbar-container .menu .links {
-  min-width: auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   flex: 1;
+  min-width: 0;
 }
 
-/* Navigation Links */
+/* Nav links */
 .other-navbar.mobile-navbar .hover-line {
   display: flex;
   align-items: center;
 }
 
+.other-navbar.mobile-navbar .hover-line::after {
+  display: none;
+}
+
 .other-navbar.mobile-navbar .hover-line a {
-  color: #f8f8ff;
+  position: relative;
+  color: var(--bx-on-dark-muted);
   text-decoration: none;
+  font-family: var(--bx-font);
   font-size: 14px;
-  font-weight: 400;
-  padding: 4px 0;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 999px;
   white-space: nowrap;
-  z-index: 100;
-  transition: opacity 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
 }
 
 .other-navbar.mobile-navbar .hover-line a:hover {
-  opacity: 0.8;
+  color: var(--bx-on-dark);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.other-navbar.mobile-navbar .underline {
-  border-bottom: solid 2px #d7b686;
+.other-navbar.mobile-navbar .hover-line a.underline {
+  color: var(--bx-on-dark);
+  border-bottom: none;
 }
 
-.other-navbar.mobile-navbar .hover-line::after {
-  display: block;
+.other-navbar.mobile-navbar .hover-line a.underline::after {
   content: "";
-  border-bottom: solid 2px #d7b686;
-  transform: scaleX(0);
-  transform-origin: 0% 50%;
-  transition: transform 250ms ease-in-out;
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 16px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--bx-red);
+  transform: translateX(-50%);
 }
 
-.other-navbar.mobile-navbar .hover-line:hover::after {
-  transform: scaleX(1);
+/* Icon buttons: savat, til, tema */
+.other-navbar.mobile-navbar .MuiIconButton-root,
+.language-switcher-btn,
+.dark-mode-toggle-btn {
+  width: 38px;
+  height: 38px;
+  padding: 0 !important;
+  color: var(--bx-on-dark) !important;
+  border-radius: 12px !important;
+  transition: background-color 0.2s ease !important;
 }
 
-
-/* User Avatar */
-.other-navbar.mobile-navbar .user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  transition: border-color 0.2s ease, transform 0.2s ease;
+.other-navbar.mobile-navbar .MuiIconButton-root:hover,
+.language-switcher-btn:hover,
+.dark-mode-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
 }
 
-.other-navbar.mobile-navbar .user-avatar:hover {
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: scale(1.05);
-}
-
-.other-navbar.mobile-navbar .user-avatar:active {
-  transform: scale(0.95);
-}
-
-/* Language Switcher - Globe icon (browser style: dark gray, continents) */
-.language-switcher-btn {
-  padding: 6px !important;
+.other-navbar.mobile-navbar .mobile-basket img {
+  width: 22px;
+  height: 22px;
 }
 
 .language-globe-icon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   filter: brightness(0) invert(1);
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
-.language-switcher-btn:hover .language-globe-icon {
-  opacity: 1;
+.dark-mode-toggle-btn .dark-mode-icon {
+  color: var(--bx-on-dark) !important;
+  font-size: 20px !important;
 }
 
-.language-switcher-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
+/* Avatar */
+.other-navbar.mobile-navbar .user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid var(--bx-red);
 }
 
-/* Basket Icon */
-.other-navbar.mobile-navbar .hover-line .MuiIconButton-root {
-  color: #f8f8ff;
-  padding: 6px;
-}
-
-.other-navbar.mobile-navbar .hover-line .MuiBadge-root {
-  color: #f8f8ff;
-}
-
-/* Header Frame - Hidden in mobile */
 .other-navbar.mobile-navbar .header-frame {
   display: none;
 }
 
-/* Responsive adjustments for different phone sizes */
-
-/* Small phones (320px - 480px) */
 @media (max-width: 480px) {
-  .other-navbar.mobile-navbar {
-    min-height: 56px;
-  }
-
   .other-navbar.mobile-navbar .navbar-container {
     padding: 8px 12px;
   }
 
-  .other-navbar.mobile-navbar .navbar-container .menu {
-    min-height: 48px;
-    gap: 6px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
-    height: 35px;
-  }
-
   .other-navbar.mobile-navbar .navbar-container .menu .links {
-    gap: 8px;
+    gap: 2px;
+  }
+
+  .other-navbar.mobile-navbar .hover-line a {
+    font-size: 13px;
+    padding: 8px 7px;
+  }
+
+  .other-navbar.mobile-navbar .mobile-navbar-logo {
+    height: 26px;
+  }
+
+  .other-navbar.mobile-navbar .MuiIconButton-root,
+  .language-switcher-btn,
+  .dark-mode-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 360px) {
+  .other-navbar.mobile-navbar .mobile-navbar-logo {
+    height: 22px;
   }
 
   .other-navbar.mobile-navbar .hover-line a {
     font-size: 12px;
-    padding: 3px 0;
-  }
-
-  .mobile-navbar-restaurant-name {
-    font-size: 16px;
-    letter-spacing: 0.8px;
-  }
-
-  .other-navbar.mobile-navbar .user-avatar {
-    width: 36px;
-    height: 36px;
+    padding: 6px 5px;
   }
 }
 
-/* Extra small phones (up to 360px) */
-@media (max-width: 360px) {
+@media (min-width: 900px) {
   .other-navbar.mobile-navbar .navbar-container {
-    padding: 6px 10px;
+    padding: 14px 24px;
   }
 
-  .other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
-    height: 32px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu .links {
-    gap: 6px;
-  }
-
-  .other-navbar.mobile-navbar .hover-line a {
-    font-size: 11px;
-  }
-
-  .mobile-navbar-restaurant-name {
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
-
-  .other-navbar.mobile-navbar .user-avatar {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-/* Medium phones (481px - 768px) */
-@media (min-width: 481px) and (max-width: 768px) {
-  .other-navbar.mobile-navbar .navbar-container {
-    padding: 12px 20px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
-    height: 45px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu .links {
-    gap: 14px;
-  }
-
-  .other-navbar.mobile-navbar .hover-line a {
-    font-size: 15px;
-  }
-}
-
-/* Landscape orientation adjustments */
-@media (max-height: 500px) and (orientation: landscape) {
-  .other-navbar.mobile-navbar {
-    min-height: 50px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container {
-    padding: 6px 16px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu {
-    min-height: 44px;
-  }
-
-  .other-navbar.mobile-navbar .navbar-container .menu .brand-logo {
-    height: 32px;
+  .other-navbar.mobile-navbar .mobile-navbar-logo {
+    height: 34px;
   }
 
   .other-navbar.mobile-navbar .navbar-container .menu .links {
     gap: 8px;
   }
+
+  .other-navbar.mobile-navbar .hover-line a {
+    font-size: 15px;
+    padding: 8px 14px;
+  }
 }
 
 /* ============================================
-   MOBILE BASKET / CART DRAWER
+   SAVAT (pastdan chiquvchi drawer)
    ============================================ */
 
-/* Basket Icon in Navbar */
-.mobile-basket .MuiIconButton-root {
-  color: #f8f8ff;
-  padding: 6px;
-}
-
-.mobile-basket .MuiBadge-root {
-  color: #f8f8ff;
-}
-
-/* Drawer Animation - Slide up from bottom */
 .mobile-basket-drawer {
-  animation: slideUpFromBottom 0.3s ease-out;
+  animation: slideUpFromBottom 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: var(--bx-bg) !important;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 @keyframes slideUpFromBottom {
   from {
     transform: translateY(100%);
-    opacity: 0;
   }
   to {
     transform: translateY(0);
-    opacity: 1;
   }
 }
 
-/* Basket Frame Container */
 .mobile-basket-frame {
   display: flex;
   flex-direction: column;
   height: 100%;
-  max-height: 70vh;
-  background: #f8f8ff;
+  max-height: 78vh;
+  background: var(--bx-bg);
   overflow: hidden;
 }
 
-/* Basket Header */
 .mobile-basket-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
-  background: #d7b586;
-  border-bottom: 1px solid #343434;
-  min-height: 56px;
+  padding: 22px 18px 14px;
+  background: var(--bx-bg);
+  border-bottom: 1px solid var(--bx-border);
+}
+
+/* drag handle */
+.mobile-basket-header::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 40px;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--bx-border);
+  transform: translateX(-50%);
 }
 
 .mobile-basket-title {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--bx-font);
   font-size: 18px;
-  font-weight: 600;
-  color: #000000;
+  font-weight: 800;
+  color: var(--bx-text);
   display: flex;
   align-items: center;
+  letter-spacing: -0.01em;
 }
 
-.mobile-basket-title span {
-  margin-right: 8px;
+.mobile-basket-title .MuiSvgIcon-root {
+  color: var(--bx-red) !important;
 }
 
 .mobile-basket-close {
-  color: #000000 !important;
-  padding: 4px !important;
+  color: var(--bx-text) !important;
+  background: var(--bx-surface-2) !important;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px !important;
 }
 
-/* Basket Items Wrapper - Scrollable */
 .mobile-basket-items-wrapper {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 12px 16px;
-  background: #f8f8ff;
+  padding: 14px 16px;
+  background: var(--bx-bg);
 }
 
 .mobile-basket-items-wrapper::-webkit-scrollbar {
@@ -367,335 +295,231 @@
 }
 
 .mobile-basket-items-wrapper::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: var(--bx-border);
   border-radius: 3px;
-}
-
-.mobile-basket-items-wrapper::-webkit-scrollbar-track {
-  background: #f1f1f1;
 }
 
 .mobile-basket-items {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* Individual Basket Item */
 .mobile-basket-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background: var(--bx-surface);
+  border: 1px solid var(--bx-border);
+  border-radius: var(--bx-radius);
   position: relative;
 }
 
-.mobile-product-img {
-  width: 60px;
-  height: 60px;
+.mobile-basket-item .mobile-product-img {
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
   object-fit: cover;
-  filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
   flex-shrink: 0;
 }
 
-.mobile-product-info {
+.mobile-basket-item .mobile-product-info {
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 4px;
   min-width: 0;
+  padding: 0;
 }
 
-.mobile-product-name {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  color: #000000;
-  line-height: 1.4;
+.mobile-basket-item .mobile-product-name {
+  font-family: var(--bx-font);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bx-text);
+  line-height: 1.3;
+  min-height: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: block;
 }
 
-.mobile-product-price {
-  font-family: "Poppins", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #ae0000;
+.mobile-basket-item .mobile-product-price {
+  font-family: var(--bx-font);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--bx-price);
 }
 
 .mobile-product-actions {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-end;
+  gap: 6px;
 }
 
-/* Quantity Controls */
+.mobile-product-actions .MuiIconButton-root .MuiSvgIcon-root {
+  color: var(--bx-subtle) !important;
+}
+
+.mobile-product-actions .MuiIconButton-root:hover .MuiSvgIcon-root {
+  color: var(--bx-red) !important;
+}
+
 .mobile-quantity-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 4px;
-  background: #f8f8ff;
+  gap: 4px;
+  border-radius: 10px;
+  padding: 3px;
+  background: var(--bx-surface-2);
 }
 
 .mobile-quantity-btn {
   width: 28px;
   height: 28px;
   border: none;
-  background: #3776CC;
-  color: #ffffff;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: 600;
+  background: transparent;
+  color: var(--bx-text);
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mobile-quantity-btn.mobile-quantity-plus {
+  background: var(--bx-red);
+  color: #fff;
 }
 
 .mobile-quantity-btn:active {
-  background: #2d5fa3;
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 .mobile-quantity-value {
-  min-width: 24px;
+  min-width: 22px;
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--bx-font);
   font-size: 14px;
-  font-weight: 600;
-  color: #000000;
+  font-weight: 800;
+  color: var(--bx-text);
 }
 
-/* Basket Footer */
 .mobile-basket-footer {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 16px;
-  background: #ffffff;
-  border-top: 2px solid #d7b586;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+  background: var(--bx-surface);
+  border-top: 1px solid var(--bx-border);
 }
 
 .mobile-basket-total {
-  font-family: "Poppins", sans-serif;
-  font-size: 20px;
-  font-weight: 600;
-  color: #000000;
-  text-align: center;
+  font-family: var(--bx-font);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--bx-text);
+  text-align: left;
+  letter-spacing: -0.01em;
 }
 
 .mobile-order-button {
   width: 100%;
-  background: #3776CC !important;
-  color: #f8f8ff !important;
-  padding: 12px 24px !important;
+  background: var(--bx-red) !important;
+  color: #fff !important;
+  padding: 14px 24px !important;
   font-size: 16px !important;
-  font-weight: 600 !important;
+  font-weight: 800 !important;
   text-transform: none !important;
-  border-radius: 8px !important;
-  transition: background-color 0.2s ease;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 24px var(--bx-red-glow) !important;
+  transition: background-color 0.2s ease, transform 0.15s ease !important;
 }
 
 .mobile-order-button:hover {
-  background: #2d5fa3 !important;
+  background: var(--bx-red-hover) !important;
 }
 
-/* Empty Cart Message */
+.mobile-order-button:active {
+  transform: scale(0.98);
+}
+
 .mobile-basket-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px 20px;
+  padding: 48px 20px;
   text-align: center;
 }
 
+.mobile-basket-empty .MuiSvgIcon-root {
+  color: var(--bx-surface-2) !important;
+}
+
 .mobile-basket-empty span {
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
-  color: #888;
-  font-weight: 400;
-}
-
-/* Responsive adjustments for mobile basket */
-@media (max-width: 480px) {
-  .mobile-basket-header {
-    padding: 12px;
-    min-height: 52px;
-  }
-
-  .mobile-basket-title {
-    font-size: 16px;
-  }
-
-  .mobile-basket-items-wrapper {
-    padding: 10px 12px;
-  }
-
-  .mobile-basket-item {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .mobile-product-img {
-    width: 50px;
-    height: 50px;
-  }
-
-  .mobile-product-name {
-    font-size: 14px;
-  }
-
-  .mobile-product-price {
-    font-size: 13px;
-  }
-
-  .mobile-quantity-btn {
-    width: 24px;
-    height: 24px;
-    font-size: 16px;
-  }
-
-  .mobile-basket-footer {
-    padding: 12px;
-  }
-
-  .mobile-basket-total {
-    font-size: 18px;
-  }
-
-  .mobile-order-button {
-    padding: 10px 20px !important;
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 360px) {
-  .mobile-basket-header {
-    padding: 10px;
-  }
-
-  .mobile-basket-title {
-    font-size: 14px;
-  }
-
-  .mobile-product-img {
-    width: 45px;
-    height: 45px;
-  }
-
-  .mobile-product-name {
-    font-size: 13px;
-  }
-
-  .mobile-basket-total {
-    font-size: 16px;
-  }
+  font-family: var(--bx-font);
+  font-size: 15px;
+  color: var(--bx-muted);
+  font-weight: 600;
 }
 
 /* ============================================
-   MOBILE CALL WAITER BUTTON
+   OFITSIANTNI CHAQIRISH tugmasi
    ============================================ */
 
 .mobile-call-waiter-btn {
   position: fixed !important;
-  bottom: 20px !important;
+  bottom: calc(20px + env(safe-area-inset-bottom)) !important;
   right: 20px !important;
-  width: 70px !important;
-  height: 70px !important;
+  width: 64px !important;
+  height: 64px !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   z-index: 999 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  background: var(--bx-red) !important;
+  color: #fff !important;
+  box-shadow: 0 12px 28px var(--bx-red-glow), 0 0 0 6px rgba(225, 29, 46, 0.12) !important;
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+}
+
+.mobile-call-waiter-btn:hover {
+  background: var(--bx-red-hover) !important;
 }
 
 .mobile-call-waiter-btn:active {
-  transform: scale(0.95) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  transform: scale(0.94) !important;
 }
 
 .mobile-call-waiter-icon {
-  height: 32px !important;
-  width: 32px !important;
-  margin-bottom: 2px !important;
+  height: 26px !important;
+  width: 26px !important;
 }
 
 .mobile-call-waiter-text {
-  font-weight: 700 !important;
-  font-size: 11px !important;
+  font-family: var(--bx-font) !important;
+  font-weight: 800 !important;
+  font-size: 10px !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  margin-top: 2px !important;
-}
-
-/* Responsive adjustments for call waiter button */
-@media (max-width: 480px) {
-  .mobile-call-waiter-btn {
-    width: 65px !important;
-    height: 65px !important;
-    bottom: 16px !important;
-    right: 16px !important;
-  }
-
-  .mobile-call-waiter-icon {
-    height: 28px !important;
-    width: 28px !important;
-  }
-
-  .mobile-call-waiter-text {
-    font-size: 10px !important;
-  }
+  letter-spacing: 0.08em !important;
+  margin-top: 1px !important;
 }
 
 @media (max-width: 360px) {
   .mobile-call-waiter-btn {
-    width: 60px !important;
-    height: 60px !important;
-    bottom: 12px !important;
-    right: 12px !important;
-  }
-
-  .mobile-call-waiter-icon {
-    height: 26px !important;
-    width: 26px !important;
-  }
-
-  .mobile-call-waiter-text {
-    font-size: 9px !important;
+    width: 58px !important;
+    height: 58px !important;
+    bottom: 14px !important;
+    right: 14px !important;
   }
 }
-
-/* Landscape orientation adjustments */
-@media (max-height: 500px) and (orientation: landscape) {
-  .mobile-call-waiter-btn {
-    width: 60px !important;
-    height: 60px !important;
-    bottom: 10px !important;
-    right: 10px !important;
-  }
-
-  .mobile-call-waiter-icon {
-    height: 24px !important;
-    width: 24px !important;
-  }
-
-  .mobile-call-waiter-text {
-    font-size: 9px !important;
-  }
-}
-

@@ -1,0 +1,185 @@
+/* ============================================
+   BEXRUZ design tokens
+   Dark (default) = qora + qizil; light = oq fon, xuddi shu qizil.
+   Navbar va footer ikkala rejimda ham qora.
+   ============================================ */
+
+:root {
+  --bx-font: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bx-font-display: "Playfair Display", Georgia, serif;
+
+  --bx-red: #e11d2e;
+  --bx-red-hover: #c3101f;
+  --bx-red-deep: #7a0a14;
+  --bx-red-soft: rgba(225, 29, 46, 0.12);
+  --bx-red-glow: rgba(225, 29, 46, 0.35);
+
+  --bx-black: #0a0a0b;
+  --bx-header: rgba(10, 10, 11, 0.86);
+  --bx-on-dark: #f5f5f4;
+  --bx-on-dark-muted: #a1a1aa;
+  --bx-on-dark-border: rgba(255, 255, 255, 0.08);
+
+  --bx-success: #16a34a;
+  --bx-warning: #f59e0b;
+
+  --bx-radius-sm: 10px;
+  --bx-radius: 16px;
+  --bx-radius-lg: 22px;
+  --bx-max: 1200px;
+
+  /* light */
+  --bx-bg: #f4f3f1;
+  --bx-surface: #ffffff;
+  --bx-surface-2: #efedea;
+  --bx-border: rgba(10, 10, 11, 0.08);
+  --bx-text: #0a0a0b;
+  --bx-muted: #5b5b63;
+  --bx-subtle: #8b8b93;
+  --bx-price: #c3101f;
+  --bx-shadow: 0 1px 2px rgba(10, 10, 11, 0.04), 0 8px 24px rgba(10, 10, 11, 0.06);
+  --bx-shadow-lg: 0 12px 40px rgba(10, 10, 11, 0.14);
+}
+
+.dark-mode {
+  --bx-bg: #0a0a0b;
+  --bx-surface: #141416;
+  --bx-surface-2: #1d1d21;
+  --bx-border: rgba(255, 255, 255, 0.08);
+  --bx-text: #f5f5f4;
+  --bx-muted: #a1a1aa;
+  --bx-subtle: #71717a;
+  --bx-price: #ff4655;
+  --bx-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --bx-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  background: var(--bx-bg);
+  color: var(--bx-text);
+}
+
+body {
+  margin: 0;
+  font-family: var(--bx-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body .MuiTypography-root,
+body .MuiButton-root,
+body .MuiChip-root,
+body .MuiMenuItem-root,
+body .MuiPaginationItem-root,
+body input,
+body button {
+  font-family: var(--bx-font);
+}
+
+::selection {
+  background: var(--bx-red);
+  color: #fff;
+}
+
+/* Shared page wrapper: telefonda to'liq kenglik, kompyuterda markazda */
+.bx-page-inner {
+  width: 100%;
+  max-width: var(--bx-max);
+  margin: 0 auto;
+}
+
+/* Section heading used on orders / help */
+.bx-section-title {
+  font-family: var(--bx-font) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+  color: var(--bx-muted) !important;
+  margin: 8px 0 14px !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bx-section-title::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: var(--bx-red);
+  border-radius: 2px;
+}
+
+/* MUI badge on cart */
+.MuiBadge-badge.MuiBadge-colorSecondary {
+  background: var(--bx-red) !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* SweetAlert2 oynalari */
+body .swal2-popup {
+  font-family: var(--bx-font);
+  background: var(--bx-surface);
+  color: var(--bx-text);
+  border: 1px solid var(--bx-border);
+  border-radius: var(--bx-radius-lg);
+}
+
+body .swal2-title,
+body .swal2-html-container {
+  color: var(--bx-text);
+}
+
+body .swal2-styled.swal2-confirm {
+  background: var(--bx-red);
+  border-radius: 12px;
+  font-weight: 800;
+  box-shadow: none;
+}
+
+body .swal2-styled.swal2-cancel {
+  background: var(--bx-surface-2);
+  color: var(--bx-text);
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+body .swal2-styled:focus {
+  box-shadow: 0 0 0 3px var(--bx-red-soft);
+}
+
+body .swal2-icon.swal2-success {
+  border-color: var(--bx-success);
+  color: var(--bx-success);
+}
+
+body .swal2-icon.swal2-success [class^="swal2-success-line"] {
+  background-color: var(--bx-success);
+}
+
+body .swal2-icon.swal2-success .swal2-success-ring {
+  border-color: rgba(22, 163, 74, 0.3);
+}
+
+body .swal2-icon.swal2-error {
+  border-color: var(--bx-red);
+  color: var(--bx-red);
+}
+
+body .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+  background-color: var(--bx-red);
+}

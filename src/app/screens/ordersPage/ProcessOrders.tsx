@@ -88,6 +88,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
     const allOrders = pendingOrders?.concat(processOrders) || [];
     return (
       <Box>
+        <Typography className="bx-section-title">{t("processOrdersTitle")}</Typography>
         <Box className="mobile-orders-list">
           {allOrders.length > 0 ? (
             allOrders.map((order: Order) => (

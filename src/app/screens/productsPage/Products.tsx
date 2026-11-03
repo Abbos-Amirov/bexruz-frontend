@@ -27,7 +27,7 @@ import { setProducts } from "./slice";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { retrieveProducts } from "./selector";
 import ProductService from "../../services/ProductService";
-import { CURRENCY_SYMBOL } from "../../../lib/config";
+import { CURRENCY_SYMBOL, RESTAURANT_NAME } from "../../../lib/config";
 import { ProductCollection } from "../../../lib/enums/product.enums";
 import { serverApi } from "../../../lib/config";
 import { useHistory } from "react-router-dom";
@@ -206,6 +206,11 @@ export default function Products(props: ProductProps) {
   if (device === "mobile") {
     return (
       <div className="mobile-products-page">
+        <Box className="mobile-products-hero">
+          <span className="mobile-products-hero-kicker">{RESTAURANT_NAME}</span>
+          <h1 className="mobile-products-hero-title">{t("menu")}</h1>
+        </Box>
+
         {/* Search Bar */}
         <Box className="mobile-products-search">
           <Box className="mobile-search-container">

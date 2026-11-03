@@ -11,8 +11,9 @@ const DarkModeContext = createContext<DarkModeContextType | null>(null);
 
 export function DarkModeProvider({ children }: { children: ReactNode }) {
   const [darkMode, setDarkMode] = useState(() => {
+    // Sukut bo'yicha dark (BEXRUZ brendi qora); foydalanuvchi tanlovi saqlanadi
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved === "true";
+    return saved !== "false";
   });
 
   useEffect(() => {

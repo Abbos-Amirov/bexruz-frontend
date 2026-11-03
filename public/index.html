@@ -4,10 +4,13 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/icons/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0a0a0b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="BEXRUZ — milliy taomlar menyusi va onlayn buyurtma"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
@@ -26,7 +29,12 @@
     -->
     <title>BEXRUZ</title>
     <script>
-      if (localStorage.getItem('zomin_dark_mode') === 'true') {
+      // Sukut bo'yicha dark; faqat foydalanuvchi light tanlagan bo'lsa o'chadi
+      try {
+        if (localStorage.getItem('zomin_dark_mode') !== 'false') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      } catch (e) {
         document.documentElement.classList.add('dark-mode');
       }
     </script>
