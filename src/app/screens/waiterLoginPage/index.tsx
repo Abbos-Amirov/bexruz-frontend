@@ -1,38 +1,29 @@
-import React, { useCallback, useEffect, useState } from "react";
-import BackspaceOutlinedIcon from "@mui/icons-material/BackspaceOutlined";
+import React, { FormEvent, useState } from "react";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import { useHistory } from "react-router-dom";
 import WaiterService from "../../services/WaiterService";
 import { useWaiter } from "../../context/WaiterContext";
 import { useLanguage } from "../../context/LanguageContext";
 import "../../../css/waiter.css";
 
-const MAX_PIN = 8;
-const KEYS = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "clear", "0", "back"];
-
+/** PIN harf va raqamdan iborat (katta-kichik harf farqlanmaydi) */
 export default function WaiterLoginPage() {
   const { login } = useWaiter();
   const { t } = useLanguage();
   const history = useHistory();
   const [pin, setPin] = useState("");
+  const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const press = useCallback(
-    (key: string) => {
-      if (loading) return;
-      setError("");
-      if (key === "back") setPin((p) => p.slice(0, -1));
-      else if (key === "clear") setPin("");
-      else setPin((p) => (p.length < MAX_PIN ? p + key : p));
-    },
-    [loading]
-  );
-
-  const submit = useCallback(async () => {
-    if (!pin || loading) return;
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    const value = pin.trim();
+    if (!value || loading) return;
     setLoading(true);
     try {
-      const token = await new WaiterService().login(pin);
+      const token = await new WaiterService().login(value);
       login(token);
       history.replace("/tables");
     } catch (err: any) {
@@ -41,56 +32,47 @@ export default function WaiterLoginPage() {
     } finally {
       setLoading(false);
     }
-  }, [pin, loading, login, history]);
-
-  // Kompyuter klaviaturasidan ham kiritish mumkin
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (/^[0-9]$/.test(e.key)) press(e.key);
-      else if (e.key === "Backspace") press("back");
-      else if (e.key === "Enter") submit();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [press, submit]);
+  };
 
   return (
     <div className="waiter-login">
-      <div className="waiter-login-card">
+      <form className="waiter-login-card" onSubmit={submit}>
         <img src="/icons/zomin.svg" alt="BEXRUZ" className="waiter-login-logo" />
         <h1 className="waiter-login-title">{t("waiterLogin")}</h1>
         <p className="waiter-login-hint">{t("pinHint")}</p>
 
-        <div className={`waiter-pin-dots${error ? " has-error" : ""}`} aria-label={t("enterPin")}>
-          {Array.from({ length: Math.max(4, pin.length) }).map((_, i) => (
-            <span key={i} className={i < pin.length ? "filled" : ""} />
-          ))}
+        <div className={`waiter-pin-field${error ? " has-error" : ""}`}>
+          <input
+            type={show ? "text" : "password"}
+            value={pin}
+            onChange={(e) => {
+              setPin(e.target.value);
+              setError("");
+            }}
+            placeholder={t("enterPin")}
+            aria-label={t("enterPin")}
+            autoComplete="off"
+            autoCapitalize="characters"
+            autoCorrect="off"
+            spellCheck={false}
+            maxLength={32}
+            autoFocus
+          />
+          <button
+            type="button"
+            className="waiter-pin-toggle"
+            onClick={() => setShow((v) => !v)}
+            aria-label={show ? "Hide" : "Show"}
+          >
+            {show ? <VisibilityOffRoundedIcon /> : <VisibilityRoundedIcon />}
+          </button>
         </div>
         <div className="waiter-login-error" role="alert">{error}</div>
 
-        <div className="waiter-keypad">
-          {KEYS.map((key) => (
-            <button
-              key={key}
-              type="button"
-              className={`waiter-key${key === "clear" || key === "back" ? " is-action" : ""}`}
-              onClick={() => press(key)}
-              aria-label={key === "back" ? "Backspace" : key === "clear" ? "Clear" : key}
-            >
-              {key === "back" ? <BackspaceOutlinedIcon /> : key === "clear" ? "C" : key}
-            </button>
-          ))}
-        </div>
-
-        <button
-          type="button"
-          className="waiter-login-submit"
-          disabled={!pin || loading}
-          onClick={submit}
-        >
+        <button type="submit" className="waiter-login-submit" disabled={!pin.trim() || loading}>
           {t("login")}
         </button>
-      </div>
+      </form>
     </div>
   );
 }

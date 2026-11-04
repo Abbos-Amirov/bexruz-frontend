@@ -44,32 +44,44 @@
   color: var(--bx-on-dark-muted);
 }
 
-.waiter-pin-dots {
-  display: flex;
-  gap: 12px;
-  min-height: 16px;
+.waiter-pin-field {
+  position: relative;
+  width: 100%;
   margin-bottom: 8px;
 }
 
-.waiter-pin-dots span {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+.waiter-pin-field input {
+  width: 100%;
+  height: 58px;
+  padding: 0 52px 0 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-family: var(--bx-font);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.waiter-pin-dots span.filled {
-  background: var(--bx-red);
+.waiter-pin-field input::placeholder {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--bx-on-dark-muted);
+}
+
+.waiter-pin-field input:focus {
   border-color: var(--bx-red);
+  box-shadow: 0 0 0 4px rgba(225, 29, 46, 0.18);
 }
 
-.waiter-pin-dots.has-error {
+.waiter-pin-field.has-error input {
+  border-color: var(--bx-red);
   animation: pinShake 0.35s ease;
-}
-
-.waiter-pin-dots.has-error span {
-  border-color: var(--bx-red);
 }
 
 @keyframes pinShake {
@@ -78,51 +90,34 @@
   75% { transform: translateX(8px); }
 }
 
+.waiter-pin-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--bx-on-dark-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.waiter-pin-toggle:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
 .waiter-login-error {
   min-height: 20px;
   margin-bottom: 14px;
   font-size: 13px;
   font-weight: 700;
   color: #ff6b76;
-}
-
-.waiter-keypad {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
-}
-
-.waiter-key {
-  height: 64px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
-  color: #fff;
-  font-family: var(--bx-font);
-  font-size: 24px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.15s ease, transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.waiter-key:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.waiter-key:active {
-  transform: scale(0.95);
-  background: rgba(225, 29, 46, 0.2);
-}
-
-.waiter-key.is-action {
-  color: var(--bx-on-dark-muted);
-  font-size: 18px;
 }
 
 .waiter-login-submit {
