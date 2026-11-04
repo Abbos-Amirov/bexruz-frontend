@@ -523,3 +523,10 @@
     right: 14px !important;
   }
 }
+
+/* Tor telefonlarda "Yordam" havolasi footer'da qoladi */
+@media (max-width: 480px) {
+  .other-navbar.mobile-navbar .navbar-help-link {
+    display: none;
+  }
+}

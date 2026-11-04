@@ -1,0 +1,522 @@
+/* ============================================
+   AFITSANT ILOVASI: PIN, stollar, stol banneri
+   ============================================ */
+
+/* ---------- PIN ekrani ---------- */
+.waiter-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(225, 29, 46, 0.26) 0%, transparent 60%),
+    var(--bx-black);
+  color: var(--bx-on-dark);
+  font-family: var(--bx-font);
+}
+
+.waiter-login-card {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.waiter-login-logo {
+  height: 36px;
+  margin-bottom: 28px;
+}
+
+.waiter-login-title {
+  margin: 0 0 6px;
+  font-family: var(--bx-font-display);
+  font-size: 30px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.waiter-login-hint {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--bx-on-dark-muted);
+}
+
+.waiter-pin-dots {
+  display: flex;
+  gap: 12px;
+  min-height: 16px;
+  margin-bottom: 8px;
+}
+
+.waiter-pin-dots span {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.waiter-pin-dots span.filled {
+  background: var(--bx-red);
+  border-color: var(--bx-red);
+}
+
+.waiter-pin-dots.has-error {
+  animation: pinShake 0.35s ease;
+}
+
+.waiter-pin-dots.has-error span {
+  border-color: var(--bx-red);
+}
+
+@keyframes pinShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.waiter-login-error {
+  min-height: 20px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff6b76;
+}
+
+.waiter-keypad {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.waiter-key {
+  height: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  font-family: var(--bx-font);
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.waiter-key:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.waiter-key:active {
+  transform: scale(0.95);
+  background: rgba(225, 29, 46, 0.2);
+}
+
+.waiter-key.is-action {
+  color: var(--bx-on-dark-muted);
+  font-size: 18px;
+}
+
+.waiter-login-submit {
+  width: 100%;
+  height: 54px;
+  border: none;
+  border-radius: 14px;
+  background: var(--bx-red);
+  color: #fff;
+  font-family: var(--bx-font);
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 14px 32px rgba(225, 29, 46, 0.4);
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.waiter-login-submit:hover {
+  background: var(--bx-red-hover);
+}
+
+.waiter-login-submit:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ---------- Stollar ekrani ---------- */
+.waiter-tables-page {
+  width: 100%;
+  max-width: var(--bx-max);
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.waiter-tables-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.waiter-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bx-red);
+}
+
+.waiter-kicker::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: var(--bx-red);
+}
+
+.waiter-title {
+  margin: 6px 0 4px;
+  font-family: var(--bx-font-display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--bx-text);
+}
+
+.waiter-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--bx-muted);
+}
+
+.waiter-refresh {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.waiter-refresh:active {
+  transform: rotate(-90deg);
+  transition: transform 0.2s ease;
+}
+
+.waiter-tables-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.waiter-table-tile {
+  position: relative;
+  min-height: 112px;
+  padding: 12px;
+  border-radius: var(--bx-radius-lg);
+  border: 1px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-text);
+  font-family: var(--bx-font);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.waiter-table-tile:active {
+  transform: scale(0.97);
+}
+
+.waiter-table-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+}
+
+.waiter-table-tile.status-occupied {
+  border-color: rgba(225, 29, 46, 0.45);
+  background: linear-gradient(160deg, rgba(225, 29, 46, 0.16) 0%, var(--bx-surface) 70%);
+}
+
+.waiter-table-tile.status-occupied::before {
+  background: var(--bx-red);
+}
+
+.waiter-table-tile.status-cleaning {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.waiter-table-tile.status-cleaning::before {
+  background: var(--bx-warning, #f59e0b);
+}
+
+.waiter-table-tile.is-selected {
+  border-color: var(--bx-text);
+  box-shadow: 0 0 0 2px var(--bx-text);
+}
+
+.waiter-table-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bx-muted);
+}
+
+.waiter-table-number {
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.waiter-table-status {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bx-muted);
+}
+
+.status-occupied .waiter-table-status {
+  color: var(--bx-red);
+}
+
+.status-cleaning .waiter-table-status {
+  color: #f59e0b;
+}
+
+/* faol buyurtmalar soni — burchakdagi doira */
+.waiter-table-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--bx-red);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 22px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(225, 29, 46, 0.45);
+}
+
+.waiter-empty {
+  padding: 60px 20px;
+  border: 1px dashed var(--bx-border);
+  border-radius: var(--bx-radius-lg);
+  text-align: center;
+  color: var(--bx-muted);
+  font-weight: 600;
+}
+
+@media (min-width: 600px) {
+  .waiter-tables-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (min-width: 900px) {
+  .waiter-tables-page {
+    padding: 40px 24px 56px;
+  }
+
+  .waiter-title {
+    font-size: 44px;
+  }
+
+  .waiter-tables-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .waiter-table-tile {
+    min-height: 140px;
+  }
+}
+
+/* ---------- Menyu tepasidagi stol banneri ---------- */
+.table-banner {
+  margin: 14px 16px 0;
+  padding: 12px;
+  border-radius: var(--bx-radius-lg);
+  border: 1px solid rgba(225, 29, 46, 0.35);
+  background: linear-gradient(160deg, rgba(225, 29, 46, 0.14) 0%, var(--bx-surface) 60%);
+  font-family: var(--bx-font);
+}
+
+.table-banner.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-style: dashed;
+  background: var(--bx-surface);
+  color: var(--bx-muted);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.table-banner-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-banner-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: var(--bx-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-banner-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-banner-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bx-muted);
+}
+
+.table-banner-table {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--bx-text);
+  line-height: 1.15;
+}
+
+.table-banner-btn {
+  flex-shrink: 0;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-text);
+  font-family: var(--bx-font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table-banner-btn.primary {
+  border-color: var(--bx-red);
+  background: var(--bx-red);
+  color: #fff;
+}
+
+.table-banner-orders {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bx-border);
+}
+
+.table-banner-orders summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--bx-text);
+}
+
+.table-banner-orders summary::-webkit-details-marker {
+  display: none;
+}
+
+.table-banner-orders summary::after {
+  content: "▾";
+  margin-left: 8px;
+  color: var(--bx-muted);
+  transition: transform 0.2s ease;
+}
+
+.table-banner-orders[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.table-banner-count {
+  margin-left: auto;
+  color: var(--bx-price, var(--bx-red));
+}
+
+.table-banner-orders ul {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.table-banner-orders li {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.table-banner-time {
+  flex-shrink: 0;
+  font-weight: 800;
+  color: var(--bx-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.table-banner-items {
+  color: var(--bx-text);
+}
+
+.table-banner-none {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--bx-muted);
+}
+
+@media (min-width: 900px) {
+  .table-banner {
+    margin: 20px 24px 0;
+  }
+}

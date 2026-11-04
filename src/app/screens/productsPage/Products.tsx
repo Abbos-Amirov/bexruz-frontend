@@ -35,6 +35,7 @@ import { CartItem } from "../../../lib/types/search";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useLanguage } from "../../context/LanguageContext";
 import { useAddToCartAnimation } from "../../context/AddToCartAnimation";
+import TableBanner from "../../components/tableBanner";
 import "../../../css/mobile/products.css";
 
 const categoryKeys: Record<string, string> = {
@@ -206,6 +207,7 @@ export default function Products(props: ProductProps) {
   if (device === "mobile") {
     return (
       <div className="mobile-products-page">
+        <TableBanner />
         <Box className="mobile-products-hero">
           <span className="mobile-products-hero-kicker">{RESTAURANT_NAME}</span>
           <h1 className="mobile-products-hero-title">{t("menu")}</h1>

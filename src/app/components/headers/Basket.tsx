@@ -10,9 +10,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useHistory } from "react-router-dom";
 import { CartItem } from "../../../lib/types/search";
 import { serverApi, CURRENCY_SYMBOL } from "../../../lib/config";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { sweetErrorHandling, sweetTopSmallSuccessAlert } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobals";
-import OrderService from "../../services/OrderService";
+import WaiterService from "../../services/WaiterService";
+import { useWaiter } from "../../context/WaiterContext";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useLanguage } from "../../context/LanguageContext";
 import "../../../css/mobile/navbar.css";
@@ -28,13 +29,14 @@ interface BasketProps {
 export default function Basket(props: BasketProps) {
   const { cartItems, onAdd, onDelete, onDeleteAll, onRemove } = props;
   const { setOrderBulder } = useGlobals();
+  const { table, setTable } = useWaiter();
   const history = useHistory();
   const itemsPrice = cartItems.reduce(
     (a: number, c: CartItem) => a + c.quantity * c.price,
     0
   );
-  const shippingCost: number = itemsPrice < 100 ? 5 : 0;
-  const totalPrice = (itemsPrice + shippingCost).toFixed(1);
+  // Stol buyurtmasida yetkazib berish narxi yo'q — server ham qo'shmaydi
+  const totalPrice = itemsPrice.toLocaleString("en-US");
   const device = useDeviceDetect();
   const { t } = useLanguage();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -61,16 +63,21 @@ export default function Basket(props: BasketProps) {
   };
 
   const proceedOrderHandler = async () => {
+    if (!table) {
+      handleClose();
+      await sweetErrorHandling({ message: t("selectTableFirst") });
+      history.push("/tables");
+      return;
+    }
     try {
       handleClose();
-
-      const order = new OrderService();
-      await order.createOrder(cartItems);
-
+      await new WaiterService().createOrder(table._id, cartItems);
       onDeleteAll();
-
       setOrderBulder(new Date());
-      history.push("/orders");
+      sweetTopSmallSuccessAlert(`${t("table")} ${table.tableNumber}: ${t("orderSent")}`, 2500);
+      // Keyingi stolga o'tish uchun stollar ekraniga qaytamiz
+      setTable(null);
+      history.push("/tables");
     } catch (err) {
       console.log(err);
       sweetErrorHandling(err).then();
@@ -187,7 +194,7 @@ export default function Basket(props: BasketProps) {
             {cartItems.length !== 0 && (
               <Box className={"mobile-basket-footer"}>
                 <span className={"mobile-basket-total"}>
-                  Total: {CURRENCY_SYMBOL}{totalPrice}
+                  {t("total")}: {CURRENCY_SYMBOL}{totalPrice}
                 </span>
                 <Button
                   startIcon={<ShoppingCartIcon />}
@@ -195,7 +202,7 @@ export default function Basket(props: BasketProps) {
                   onClick={proceedOrderHandler}
                   className="mobile-order-button"
                 >
-                  {t("orderReady")}
+                  {table ? `${t("sendOrder")} · ${t("table")} ${table.tableNumber}` : t("selectTableFirst")}
                 </Button>
               </Box>
             )}
@@ -307,7 +314,7 @@ export default function Basket(props: BasketProps) {
           {cartItems.length !== 0 ? (
             <Box className={"basket-order"}>
               <span className={"price"}>
-                Total: {CURRENCY_SYMBOL}{totalPrice} ({CURRENCY_SYMBOL}{itemsPrice} + {CURRENCY_SYMBOL}{shippingCost})
+                {t("total")}: {CURRENCY_SYMBOL}{totalPrice}
               </span>
               <Button
                 startIcon={<ShoppingCartIcon />}

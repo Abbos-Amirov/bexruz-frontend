@@ -183,3 +183,21 @@ body .swal2-icon.swal2-error {
 body .swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
   background-color: var(--bx-red);
 }
+
+/* SweetAlert toast (yuqori o'ngdagi kichik xabar) — o'z stili kuchliroq bo'lgani uchun alohida */
+body .swal2-popup.swal2-toast {
+  background: var(--bx-surface);
+  color: var(--bx-text);
+  border: 1px solid var(--bx-border);
+  box-shadow: var(--bx-shadow-lg);
+}
+
+body .swal2-popup.swal2-toast .swal2-title {
+  color: var(--bx-text);
+  font-family: var(--bx-font);
+  font-weight: 700;
+}
+
+body .swal2-popup.swal2-toast .swal2-timer-progress-bar {
+  background: var(--bx-red);
+}

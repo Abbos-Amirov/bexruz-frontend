@@ -13,6 +13,7 @@ import "./css/index.css";
 import ContextProvider from "./app/context/ContextProvider";
 import { LanguageProvider } from "./app/context/LanguageContext";
 import { DarkModeProvider, useDarkMode } from "./app/context/DarkModeContext";
+import { WaiterProvider } from "./app/context/WaiterContext";
 import "./css/bexruz-theme.css";
 
 function ThemedApp() {
@@ -37,7 +38,9 @@ root.render(
       <ContextProvider>
         <LanguageProvider>
         <DarkModeProvider>
+        <WaiterProvider>
           <ThemedApp />
+        </WaiterProvider>
         </DarkModeProvider>
         </LanguageProvider>
       </ContextProvider>
