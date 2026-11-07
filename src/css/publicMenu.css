@@ -1,0 +1,243 @@
+/* ============================================
+   MIJOZLAR MENYUSI (stoldagi QR) — faqat ko'rish
+   ============================================ */
+
+.public-menu {
+  min-height: 100vh;
+  background: var(--bx-bg);
+}
+
+.public-menu-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+}
+
+.public-menu-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.public-menu-subtitle {
+  position: relative;
+  margin: 6px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bx-muted);
+}
+
+.public-menu-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 16px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(225, 29, 46, 0.3);
+  background: var(--bx-red-soft);
+  color: var(--bx-text);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.public-menu-note .MuiSvgIcon-root {
+  color: var(--bx-red);
+}
+
+.public-menu-note.in-sheet {
+  margin: 18px 0 0;
+}
+
+.public-menu-chip {
+  height: 38px;
+  padding: 0 16px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 1px solid var(--bx-border);
+  background: var(--bx-surface);
+  color: var(--bx-muted);
+  font-family: var(--bx-font);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.public-menu-chip.active {
+  background: var(--bx-red);
+  border-color: var(--bx-red);
+  color: #fff;
+  box-shadow: 0 8px 20px var(--bx-red-glow);
+}
+
+/* Kartochka — tugma, lekin savat yo'q */
+.public-menu-card {
+  padding: 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.public-menu-card .mobile-product-info {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.public-menu-name {
+  font-family: var(--bx-font);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bx-text);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 39px;
+}
+
+.public-menu-card .mobile-product-price {
+  font-family: var(--bx-font);
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--bx-price);
+}
+
+.public-menu-size {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(10, 10, 11, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.public-menu-loading {
+  height: 200px;
+  border-radius: var(--bx-radius-lg);
+  background: linear-gradient(90deg, var(--bx-surface) 0%, var(--bx-surface-2) 50%, var(--bx-surface) 100%);
+  background-size: 200% 100%;
+  animation: menuShimmer 1.2s linear infinite;
+}
+
+@keyframes menuShimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.public-menu-footer {
+  padding: 24px 16px 32px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--bx-subtle);
+}
+
+/* Taom tafsiloti — pastdan chiquvchi oyna */
+.public-menu-sheet.MuiPaper-root {
+  max-width: 640px;
+  margin: 0 auto;
+  max-height: 88vh;
+  border-radius: 24px 24px 0 0;
+  background: var(--bx-bg);
+  overflow: hidden;
+}
+
+.public-menu-sheet-inner {
+  overflow-y: auto;
+}
+
+.public-menu-sheet-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background-color: var(--bx-surface-2);
+  background-size: cover;
+  background-position: center;
+}
+
+.public-menu-sheet-close.MuiIconButton-root {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(10, 10, 11, 0.6);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+
+.public-menu-sheet-close.MuiIconButton-root:hover {
+  background: rgba(10, 10, 11, 0.8);
+}
+
+.public-menu-sheet-body {
+  padding: 20px 18px calc(24px + env(safe-area-inset-bottom));
+  font-family: var(--bx-font);
+  color: var(--bx-text);
+}
+
+.public-menu-sheet-body h2 {
+  margin: 0 0 8px;
+  font-family: var(--bx-font-display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.public-menu-sheet-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--bx-border);
+}
+
+.public-menu-sheet-price {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--bx-price);
+}
+
+.public-menu-sheet-size {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--bx-red-soft);
+  color: var(--bx-red);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.public-menu-sheet-body h3 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bx-muted);
+}
+
+.public-menu-sheet-body p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.88;
+}
+
+@media (min-width: 900px) {
+  .public-menu-note {
+    margin: 16px 24px 0;
+    max-width: 560px;
+  }
+}

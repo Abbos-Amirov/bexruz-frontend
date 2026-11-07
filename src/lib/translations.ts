@@ -90,6 +90,10 @@ export const translations: Record<Language, Record<string, string>> = {
     total: "Jami",
     refresh: "Yangilash",
     noTables: "Stollar topilmadi",
+    // Public menu (QR)
+    allCategories: "Hammasi",
+    menuOnlyNote: "Buyurtma berish uchun afitsantni chaqiring",
+    menuSubtitle: "Bugungi taomlarimiz",
   },
   ko: {
     menu: "메뉴",
@@ -180,6 +184,10 @@ export const translations: Record<Language, Record<string, string>> = {
     total: "합계",
     refresh: "새로고침",
     noTables: "테이블이 없습니다",
+    // Public menu (QR)
+    allCategories: "전체",
+    menuOnlyNote: "주문은 직원에게 말씀해 주세요",
+    menuSubtitle: "오늘의 메뉴",
   },
   en: {
     menu: "Menu",
@@ -270,6 +278,10 @@ export const translations: Record<Language, Record<string, string>> = {
     total: "Total",
     refresh: "Refresh",
     noTables: "No tables found",
+    // Public menu (QR)
+    allCategories: "All",
+    menuOnlyNote: "Please ask a waiter to place your order",
+    menuSubtitle: "Today's dishes",
   },
   ru: {
     menu: "Меню",
@@ -360,5 +372,9 @@ export const translations: Record<Language, Record<string, string>> = {
     total: "Итого",
     refresh: "Обновить",
     noTables: "Столы не найдены",
+    // Public menu (QR)
+    allCategories: "Все",
+    menuOnlyNote: "Для заказа позовите официанта",
+    menuSubtitle: "Наши блюда сегодня",
   },
 };

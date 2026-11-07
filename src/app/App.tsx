@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import ProductsPage from "./screens/productsPage";
 import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
 import HelpPage from "./screens/helpPage";
 import TablesPage from "./screens/tablesPage";
 import WaiterLoginPage from "./screens/waiterLoginPage";
+import PublicMenuPage from "./screens/publicMenuPage";
 import useBasket from "./hooks/useBasket";
 import { useWaiter } from "./context/WaiterContext";
 import "../css/app.css";
@@ -21,6 +22,12 @@ import { AddToCartAnimationProvider } from "./context/AddToCartAnimation";
 export default function App() {
   const { token } = useWaiter();
   const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
+  const location = useLocation();
+
+  // Stoldagi QR: mijozlar uchun faqat ko'rish menyusi — PIN ham, navbar ham yo'q
+  if (location.pathname === "/menu" || location.pathname.startsWith("/menu/")) {
+    return <PublicMenuPage />;
+  }
 
   if (!token) {
     return (
